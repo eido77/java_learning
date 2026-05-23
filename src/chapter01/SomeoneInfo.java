@@ -1,4 +1,6 @@
-class someoneinfo_02 {
+package chapter01;
+
+class SomeoneInfo {
     /*多行注释
     （单行注释用//，在01有出现，只能注释//所在的一行，//后面被注释）
     class里不体现，注释不参与编译

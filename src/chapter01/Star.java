@@ -1,5 +1,7 @@
+package chapter01;
+
 //println 自己就会在最后自动换行。
-public class Star_03 {
+public class Star {
     public static void main(String[] args) {
         System.out.println("*    *");
         //"\t"表示一定长度的空格
