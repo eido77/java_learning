@@ -3,6 +3,7 @@ package chapter03;
 public class IfElseTest {
     public static void main(String[] args) {
         /*
+        条件表达式的结果(值)是 true 或 false,也就是一个 boolean 类型的值。
         分支结构1：if-else条件判断结构
             格式1：if (条件表达式) {
                   语块句
