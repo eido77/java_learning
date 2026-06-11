@@ -1,23 +1,16 @@
 package chapter06;
 
 public class Employee {
-    public static void main(String[] args) {
-        /*
+    /*
     案例：
     声明员工类Employee，包含属性：编号id、姓名name、年龄age、薪资salary。
     声明EmployeeTest测试类，并在main方法中，创建2个员工对象，并为属性赋值，并打印两个员工的信息。
-     */
-        class Employee {
-            int id;
-            String name;
-            int age;
-            int salary;
-        }
+    */
+    //属性（或成员变量）
+    int id;
+    String name;
+    int age;
+    double salary;
 
 
-
-
-
-
-    }
 }
