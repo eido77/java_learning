@@ -16,6 +16,7 @@ public class EmployeeTest {
         System.out.println(emp1.salary); // 0.0
 
         emp1.name = "Rose";
+        // emp1.name = new String("Rose"); // 通过
         emp1.age = 18;
         emp1.salary = 1000;
         emp1.id = 1001;
@@ -41,6 +42,33 @@ public class EmployeeTest {
         System.out.println(emp2.age); // 24
         System.out.println(emp2.salary); // 1200
         System.out.println(emp2.id); // 1002
+
+        /*
+        案例：
+        （1）声明一个MyDate类型，有属性：年year，月month，日day
+        （2）声明一个Employee类型，包含属性：编号、姓名、年龄、薪资、生日（MyDate类型）
+        （3）在EmployeeTest测试类中的main()中，创建两个员工对象，并为他们的姓名和生日赋值，并显示
+         */
+        //创建实例
+        Employee emp4 = new Employee();
+
+        emp4.birthday = new MyDate(); // 直接赋值
+
+        // MyDate myDate1 = new MyDate(); // 先创建对象，用变量接住
+        // emp4.birthday = myDate1; // 再把变量赋给属性
+
+        emp4.birthday.year = 2026;
+        emp4.birthday.month = 6;
+        emp4.birthday.day = 11;
+        System.out.println(emp4.birthday.year); // 2026
+        System.out.println(emp4.birthday.month); // 6
+        System.out.println(emp4.birthday.day); // 11
+
+
+
+
+
+
 
     }
 }
