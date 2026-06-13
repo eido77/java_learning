@@ -20,10 +20,21 @@ public class EmployeeTest {
         emp1.age = 18;
         emp1.salary = 1000;
         emp1.id = 1001;
-        System.out.println(emp1.name); // Rose
-        System.out.println(emp1.age); // 18
-        System.out.println(emp1.salary); // 1000.0
-        System.out.println(emp1.id); // 1001
+        //System.out.println(emp1.name); // Rose
+        //System.out.println(emp1.age); // 18
+        //System.out.println(emp1.salary); // 1000.0
+        //System.out.println(emp1.id); // 1001
+        System.out.println("----------------");
+        //替换为：
+        emp1.show(); // 1001 Rose 18 1000.0
+
+        //报错
+        //System.out.println(emp1.show());
+
+        //emp1.show1(); // 执行了但是没输出
+        System.out.println(emp1.show1()); // id = 1001, name = Rose, age = 18, salary = 1000.0
+
+        System.out.println("----------------");
 
         Employee emp3 = emp1; // 没有创建新对象，只是复制地址
 

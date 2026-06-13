@@ -20,4 +20,19 @@ public class Employee {
     //自己定义的类,而类本身就是一种数据类型(引用数据类型)。
     MyDate birthday;
 
+    //案例：将属性测试中关于员工信息的输出内容放到方法中。通过调用方法显示。
+    //定义一个方法，用于显示员工的属性信息
+    public void show() {
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(salary);
+    }
+
+    public String show1() {
+        //System.out.println() 的返回类型是 void，所以你不能把它当成 String return 出去
+        //return System.out.println(id);
+        return "id = " + id + ", name = " + name + ", age = " + age + ", salary = " + salary;
+    }
+
 }
