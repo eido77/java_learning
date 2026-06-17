@@ -75,11 +75,5 @@ public class EmployeeTest {
         System.out.println(emp4.birthday.month); // 6
         System.out.println(emp4.birthday.day); // 11
 
-
-
-
-
-
-
     }
 }
