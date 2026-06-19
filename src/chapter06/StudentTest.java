@@ -34,6 +34,9 @@ public class StudentTest {
         }
 
         //问题一：打印出3年级(state值为3）的学生信息。
+        StudentUtil util = new StudentUtil();
+        util.printStudentWithState(students, 3);
+        /*
         for (int i = 0; i < students.length; i++) {
             if (students[i].state == 3) {
                 //System.out.println("number = " + students[i].number + ", state = " + students[i].state + ", score = " + students[i].score);
@@ -42,19 +45,25 @@ public class StudentTest {
                 System.out.println(students[i].show());
             }
         }
+         */
 
         //问题二：使用冒泡排序按学生成绩排序，并遍历所有学生信息
 
         //遍历，排序前
+        util.printStudents(students);
+        /*
         for (int i = 0; i < students.length; i++) {
             System.out.println(students[i].show());
         }
+         */
         System.out.println("----------------");
 
         //排序
+        util.sortStudents(students);
+        /*
         for (int i = 0; i < students.length - 1; i++) {
-            for (int j = i + 1; j < students.length - 1 - i; j++) {
-                if (students[j].score > students[i].score) {
+            for (int j = 0; j < students.length - 1 - i; j++) {
+                if (students[j].score > students[j + 1].score) {
                     //不满足实际需求
                     //int temp = students[j].score;
                     //students[j].score = students[j + 1].score;
@@ -67,11 +76,15 @@ public class StudentTest {
                 }
             }
         }
+         */
 
         //遍历
+        util.printStudents(students);
+        /*
         for (int i = 0; i < students.length; i++) {
             System.out.println(students[i].show());
         }
+         */
 
 
 
