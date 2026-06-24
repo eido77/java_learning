@@ -39,7 +39,8 @@ public class MyArraysTest {
 
         //排序
         int[] arr3 = new int[]{2, 3, 1, 4};
-        myArrays.sort(arr3);
+        myArrays.sort(arr3, "asc"); // [1, 2, 3, 4]
+        myArrays.sort(arr3, "desc"); // [4, 3, 2, 1]
         //System.out.println(Arrays.toString(arr3));
         //用String类型接收
         String arr4 = Arrays.toString(arr3);
