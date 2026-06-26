@@ -77,7 +77,53 @@ public class RecursionTest {
 
     /**
      * 举例3:快速排序
+     * 核心思想（分而治之）：
+     *   ① 挑一个"基准值"（这里取最左边的元素）
+     *   ② 一趟扫描，把比基准小的甩到左边、比基准大的甩到右边，
+     *      使基准落到它最终该在的位置
+     *   ③ 对基准左边、右边两段，各自再递归快排一次，直到每段只剩 1 个元素
+     *
+     *
+     * @param arr   要排序的数组
+     * @param left  当前排序范围的左边界（起始下标）
+     * @param right 当前排序范围的右边界（结束下标）
      */
+    public void quickSort(int[] arr, int left, int right) {
+        // 递归出口：左边界 >= 右边界，说明这段只剩 0 或 1 个元素，无需再排
+        if (left >= right) {
+            return;
+        }
+
+        int pivot = arr[left];  // 基准值，取最左边的元素
+        int i = left;           // 左指针，从左往右扫
+        int j = right;          // 右指针，从右往左扫
+
+        // 一趟"分区"：把小的换到左边，大的换到右边
+        while (i < j) {
+            // 右指针从右往左找，找到第一个比基准小的元素才停
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            // 左指针从左往右找，找到第一个比基准大的元素才停
+            while (i < j && arr[i] <= pivot) {
+                i++;
+            }
+            // 交换这两个元素，让小的去左边、大的去右边
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // i 和 j 相遇，把基准值放到这个分界点，此时基准左边都比它小、右边都比它大
+        arr[left] = arr[i];
+        arr[i] = pivot;
+
+        // 对基准左半段、右半段分别递归（分而治之）
+        quickSort(arr, left, i - 1);
+        quickSort(arr, i + 1, right);
+    }
 
     /**
      * 举例4:汉诺塔游戏
