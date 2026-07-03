@@ -1,7 +1,7 @@
 package chapter02;
 
 public class VariableTest {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         /*
         测试基本数据类型变量间的运算规则

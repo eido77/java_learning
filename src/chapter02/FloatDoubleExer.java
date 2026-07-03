@@ -1,7 +1,7 @@
 package chapter02;
 
 public class FloatDoubleExer {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         //案例1 定义圆周率并赋值为3.14，现有3个圆的半径分别为1.2、2.5、6，求它们的面积。
         //先定义圆周率，浮点型通常用double

@@ -15,7 +15,7 @@ Java变量按数据类型分类
 变量值在赋值时，必须满足变量的数据类型，并在数据类型有效的范围内变化。
  */
 public class Variable {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         //定义变量方式1
         int age = 10;  //声明与初始化合并
@@ -45,7 +45,7 @@ public class Variable {
         System.out.println(gender);
     }
 
-    public static void main1(String[] args) {
+    public static void main1(StringTest[] args) {
         //char 只能存放一个字符，字面量只能用单引号 ' '（\n、\t算一个字符，Unicode转译也算一个字符）
         char gender = '女';
     }

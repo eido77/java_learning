@@ -1,7 +1,7 @@
 package chapter02;
 //整型、浮点型变量的使用
 public class Variable2 {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         //整型变量「byte、short、int、long」的使用
         /*

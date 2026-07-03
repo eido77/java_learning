@@ -26,8 +26,8 @@ public class ValueTransferTest {
         Order order1 = new Order();
         order1.orderId = 1001;
 
-        //传递的是地址值，order2 和 order1 指向同一个 Order 对象
-        Order order2 = order1; // 复制地址，order1 和 order2 指向同一个 Order 对象
+        //传递的是地址值，order2 和 order1 指向同一个 Order2 对象
+        Order order2 = order1; // 复制地址，order1 和 order2 指向同一个 Order2 对象
         order2.orderId = 1002; // 通过 order2 改动，order1 看到的也变了
         System.out.println(order1.orderId); // 1002
 

@@ -1,7 +1,7 @@
 package chapter02;
 
 public class CharBoolean {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         /*
         字符类型char，占用两个字节

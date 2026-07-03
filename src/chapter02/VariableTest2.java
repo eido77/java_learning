@@ -1,7 +1,7 @@
 package chapter02;
 
 public class VariableTest2 {
-    public static void main(String[] args) {
+    public static void main(StringTest[] args) {
 
         /*
         此VariableTest2.java用来测试强制类型转换

@@ -12,7 +12,7 @@ package chapter02;
         例：java.lang、com.atguigu.bean 格式：xxxyyyzzz
 
         类名/接口名—大驼峰（UpperCamelCase / PascalCase）每个单词首字母大写
-        例：chapter01.HelloWorld、String、System 格式：XxxYyyZzz
+        例：chapter01.HelloWorld、StringTest、System 格式：XxxYyyZzz
 
         变量名 / 方法名 — 小驼峰（lowerCamelCase）第一个单词首字母小写，之后每个单词首字母大写
         例：age、bookName、binarySearch、getName 格式：xxxYyyZzz
