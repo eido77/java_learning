@@ -38,7 +38,7 @@ public class Customer {
     private String firstName; // 顾客的名。类型 String 是官方的类，存一个字符串
     private String lastName; // 顾客的姓。同上
     private Account account; // 顾客关联的账户。类型 Account 是我自己定义的类，存的是一个 Account 对象的引用（此处未赋值，默认 null）
-                             // → 体现"一个类的属性是另一个类的对象"，即类与类的关联关系
+    // → 体现"一个类的属性是另一个类的对象"，即类与类的关联关系
 
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
