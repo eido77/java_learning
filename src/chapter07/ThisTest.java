@@ -12,23 +12,58 @@ public class ThisTest {
     成员变量、方法、构造器。
 
     3. this的理解：
-    当前对象 或 当前正在创建的对象
+    当前对象（在方法中调用时） 或 当前正在创建的对象（在构造器中调用时）
 
     4.1 this调用属性和方法
-    针对于方法内的使用情况：（准确的说是非static修饰的方法）
+    【针对于方法内的使用情况：（准确的说是非static修饰的方法）】
+    一般情况：我们通过对象a调用方法，可以在方法内调用当前对象a的属性或其他方法。此时，我们可以在属性和其他方法前使用“this.”表示当前属性或方法所属的对象a
+    但是一般情况下，我们都选择省略此“this.”结构
+    特殊情况：如果方法的形参与对象的属性同名了，我们必须使用"this."进行区分。使用this.修饰的变量即为属性（或成员变量）
+            没有使用this.修饰的变量，即为局部变量。
 
-    针对于构造器内的使用情况：
+    【针对于构造器内的使用情况：】
+    一般情况：我们通过构造器创建对象时，可以在构造器内调用当前正在创建的对象的属性或方法。
+    此时，我们可以在属性和方法前使用"this."，表示当前属性或方法所属的对象。但是，一般情况下，我们都选择省略此"this."结构。
+    特殊情况：如果构造器的形参与正在创建的对象的属性同名了，我们必须使用“this."进行区分。
+    使用this.修饰的变量即为属性（或成员变量），没有使用this.修饰的变量，即为局部变量。
 
     4.2 this调用构造器
+    > 格式："this（形参列表）"
+    > 我们可以在类的构造器中，调用当前类中指定的其它构造器
+    > 要求："this（形参列表）"必须声明在当前构造器的首行
+    ＞结论："this（形参列表）"在构造器中最多声明一个
+    > 如果一个类中声明了n个构造器，则最多有n-1个构造器可以声明有"this（形參列表〕"的结构
+
      */
+    public static void main(String[] args) {
+        // 只创建了Person1类的一个对象
+        Person1 person1 = new Person1("Tom", 12);
+
+    }
 }
 
 class Person1 {
     String name;
     int age;
 
-    public Person1(String name, int age) {
+    public Person1() {
+        // 模拟对象创建时，需要初始化50行代码
+    }
+
+    public Person1(String name) {
+        // 模拟对象创建时，需要初始化50行代码
+        this();
         this.name = name;
+    }
+//    public Person1(int age) {
+//        this.age = age;
+        // this(); // call to this must be first statement in constructor
+//    }
+
+    public Person1(String name, int age) {
+        // 模拟对象创建时，需要初始化50行代码
+        this(name);
+//        this.name = name;
         this.age = age;
     }
 
