@@ -49,6 +49,14 @@ public class SuperTest {
         Student1 s2 = new Student1(); // Person3 Student1
 
         Student1 s3 = new Student1("Tom", 12); // Person3
+
+        /*
+        案例：
+        修改方法重写的练习2中定义的类Kids中employeed()方法，在该方法中调用父类ManKind的employeed()方法，
+        然后再输出"but Kids should study and no job."
+        */
+        Kids1 kids1 = new Kids1();
+        kids1.employeed(); // no job  but Kids should study and no job
     }
 }
 
@@ -139,4 +147,28 @@ class Student1 extends Person3 {
 
     }
 
+}
+
+/*
+案例：
+修改方法重写的练习2中定义的类Kids中employeed()方法，在该方法中调用父类ManKind的employeed()方法，
+然后再输出"but Kids should study and no job."
+*/
+class ManKind1 {
+    private int salary;
+
+    public void employeed() {
+        if (salary == 0) {
+            System.out.println("no job");
+        } else {
+            System.out.println("job");
+        }
+    }
+}
+
+class Kids1 extends ManKind1 {
+    public void employeed() {
+        super.employeed();
+        System.out.println("but Kids should study and no job");
+    }
 }
