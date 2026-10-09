@@ -10,7 +10,6 @@
 
 ## Learning Resources
 - Java SE: [Atguigu (尚硅谷) — Song Hongkang's Java Tutorial](https://www.bilibili.com/video/BV1PY411e7J6/)
-- MySQL: [Atguigu (尚硅谷) — MySQL Tutorial](https://www.bilibili.com/video/BV1Cm421373b/)
 - MySQL: [Heima (黑马程序员) — MySQL Tutorial](https://www.bilibili.com/video/BV1Kr4y1i7ru/)
 
 ## Timeline
