@@ -1,0 +1,73 @@
+-- DML英文全称是Data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增、删、改操作。
+-- DML 只操作表里的"数据行"（增 INSERT、删 DELETE、改 UPDATE），不改表结构；改表结构的 CREATE / ALTER / DROP 属于 DDL。
+
+/*
+ * 注意事项：
+ * 插入数据时，指定的字段顺序需要与值的顺序是一一对应的。
+ * 字符串和日期型数据应该包含在引号中。
+ * 插入的数据大小，应该在字段的规定范围内。
+ */
+-- 添加数据（INSERT）
+-- INSERT INTO 表名 (字段名1, 字段名2, ...) VALUES (值1, 值2, ...);
+-- 案例: 给employee表所有的字段添加数据
+INSERT INTO employee(id, workno, name, gender, age, idcard, entrydate)
+VALUES (1, '1', 'Itcast', '男', 10, '123456789012345678', '2000-01-01');
+
+-- SELECT * 表示查询所有字段
+SELECT *
+from employee;
+
+-- 案例: 给employee表所有的字段添加数据
+-- INSERT INTO 表名 VALUES (值1, 值2, ...);
+/*
+ * 值的个数和顺序必须和表里字段的定义顺序完全一致，
+ * 少一个或顺序不对都会报错，或者把值存进错误的字段。
+ * 以后表结构变了（比如加了一个字段），这种写法就会报错
+ */
+INSERT INTO employee
+VALUES (2, '2', '张无忌', '男', 18, '123456789012345678', '2005-01-01');
+
+-- 批量添加数据
+-- INSERT INTO 表名 (字段名1, 字段名2, ...) VALUES (值1, 值2, ...), (值1, 值2, ...), (值1, 值2, ...) ;
+-- INSERT INTO 表名 VALUES (值1, 值2, ...), (值1, 值2, ...), (值1, 值2, ...) ;
+INSERT INTO employee
+VALUES (3, '3', '韦一笑', '男', 38, '123456789412345678', '2005-01-01'),
+       (4, '4', '赵敏', '女', 18, '123456789612345678', '2005-01-01');
+
+-- 修改数据（UPDATE）
+-- UPDATE 表名 SET 字段名1 = 值1 , 字段名2 = 值2 , .... [ WHERE 条件 ] ;
+-- 注意事项：修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。
+-- 案例:
+-- A. 修改id为1的数据，将name修改为itheima
+UPDATE employee
+SET name = 'itheima'
+WHERE id = 1;
+
+-- B. 修改id为1的数据, 将name修改为小昭, gender修改为 女
+UPDATE employee
+SET name   = '小昭',
+    gender = '女'
+WHERE id = 1;
+
+-- C. 将所有的员工入职日期修改为 2008-01-01
+UPDATE employee
+SET entrydate = '2008-01-01';
+
+-- 删除数据（DELETE）
+/*
+ * DELETE 语句不能删除某一个字段的值(可以使用UPDATE，将该字段值置为NULL即可)。
+ * Execute：这次照常执行，以后遇到类似语句还会继续提醒。
+ * Execute and Suppress：这次执行，并且以后不再弹出这类提醒。
+ */
+-- 删除数据的具体语法为：
+-- DELETE FROM 表名 [ WHERE 条件 ] ;
+-- 案例:
+-- A. 删除gender为女的员工
+DELETE
+FROM employee
+where gender = '女';
+
+-- B. 删除所有员工
+-- 不带 WHERE 会删除表里所有数据，但表本身（结构）还在，之后还可以继续 INSERT。
+DELETE
+FROM employee;
