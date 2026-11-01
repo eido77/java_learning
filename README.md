@@ -9,6 +9,7 @@
 ## Learning Resources
 - Java SE: [Atguigu (尚硅谷) — Song Hongkang's Java Tutorial](https://www.bilibili.com/video/BV1PY411e7J6/)
 - MySQL: [Heima (黑马程序员) — MySQL Tutorial](https://www.bilibili.com/video/BV1Kr4y1i7ru/)
+- Maven: [Atguigu (尚硅谷) — Maven Tutorial](https://www.bilibili.com/video/BV1JN411G7gX/)
 
 ## Timeline
 | Date | Milestone |
@@ -18,3 +19,4 @@
 | 2026-08-04 | Added Maven support and learned JUnit 5 basics |
 | 2026-10-05 | Installed MySQL 8.4 LTS and connected it to IntelliJ IDEA |
 | 2026-10-13 | Completed the Java SE course |
+| 2026-11-01 | Completed the MySQL fundamentals course |
