@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <?xml version="1.0" encoding="UTF-8"?> 叫做“XML 声明”（XML Declaration）。
+       写给解析器看，说明“这是一个 XML 文件，语法版本是 1.0，文件按 UTF-8 编码读取”。
+    XML 规范规定：如果写了 XML 声明，它必须在文件的最开头。前面不能有注释、空行，也不能有空格。
+       （唯一允许出现在它前面的是编辑器自动写入的、看不见的 UTF-8 BOM 字节。）
+    这一行要么不写，要么必须写在第 1 行第 1 个字符。
+       不写时解析器默认按 XML 1.0、UTF-8 处理。
+    在 <? ... ?> 里写的内容叫“处理指令”格式，XML 声明长得像处理指令，但它是特殊的声明，只能出现一次。
+
+    POM 是 Project Object Model（项目对象模型）的缩写。
+    它是 Maven 项目的核心配置文件，必须放在项目根目录，文件名必须叫 pom.xml。
+    Maven 读它来知道：这个项目叫什么（坐标）、打成什么包（packaging）、用哪个 Java 版本编译（properties）、
+    需要下载哪些第三方 jar（dependencies）。
+
+    <project> 叫开始标签，</project> 叫结束标签，前面带 / 表示“到这里结束”。
+    两个标签中间夹着的所有内容都属于这个元素。properties、dependencies 也是这样。
+    project 是最外层，叫“根元素”。XML 规定一个文件只能有一个根元素。
+    pom.xml 的根元素必须是 project，不能换成别的名字。
+
+    XML 每个开始标签都必须有对应的结束标签，并且要正确嵌套。
+    例如 <a><b></a></b> 这种交叉嵌套是错误的。
+    如果元素里面没有内容，可以写成自闭合形式 <xxx/>，它等于 <xxx></xxx>。
+    XML 区分大小写：<Project> 和 <project> 是两个不同的标签。
+
+    project 后面三行是 project 开始标签的“属性”，作用是告诉工具“这个文件遵守哪套规则”，主要给 IDEA 和校验器使用。
+    xmlns="http://maven.apache.org/POM/4.0.0"
+       xmlns 是 XML namespace（命名空间）。意思是这个文件里的标签（project、groupId 等）都属于 Maven POM 4.0.0 这套词汇，
+       防止和别的 XML 里的同名标签混淆。
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       引入 W3C 定义的“xsi”前缀，用来使用下一行的 schemaLocation 属性。写法是固定的。
+    xsi:schemaLocation="命名空间  xsd地址"
+       两个值成对出现，中间用空格隔开。意思是“POM 4.0.0 这套规则写在 maven-4.0.0.xsd 文件里”。
+       IDEA 根据这个 xsd 提供标签自动补全，并对写错位置的标签标红。
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--
+        Maven POM 模型版本
+        modelVersion 说明这个 pom.xml 按哪一版 POM 结构来写。
+    -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        Maven 坐标（GAV）：唯一标识本项目
+        groupId + artifactId + version 三个值合起来叫 Maven 坐标（GAV）。
+        它能唯一确定一个 jar 包，就像经纬度确定一个位置。
+    -->
+    <!--
+        groupId：组织或公司标识，一般写反转的域名，例如 com.example、com.itheima。
+        它决定本地仓库里的目录层级：com.example 对应 com/example/。
+     -->
+    <groupId>com.example</groupId>
+    <!--
+        artifactId：模块或项目名，通常和项目文件夹同名，只用小写字母和短横线。
+        打包后的文件名默认是 artifactId + version，例如 maven-demo-1.0-SNAPSHOT.jar。
+    -->
+    <artifactId>maven-demo</artifactId>
+    <!--
+        version：项目版本。SNAPSHOT 表示快照版，也就是开发中、不稳定的版本，内容可能还会变化。
+        正式发布时去掉 SNAPSHOT，例如 1.0 或 1.0.0，这种版本叫 RELEASE（正式版）。
+        SNAPSHOT 要全部大写，这是 Maven 识别快照版本的约定。
+    -->
+    <version>1.0-SNAPSHOT</version>
+    <!--
+        maven工程的打包方式
+        packaging 决定 mvn package 命令最终生成什么类型的文件。
+        常见取值：
+          jar：普通 Java 项目或 Spring Boot 项目，这也是默认值，不写时就是 jar。
+          war：传统 Web 项目，需要放到 Tomcat 里运行。
+          pom：父工程或聚合工程，只负责管理子模块，本身没有代码。
+    -->
+    <packaging>jar</packaging>
+
+    <!--
+        全局属性（变量），供插件读取或用 ${} 引用
+        properties 用来定义“键值对变量”，标签名是键，内容是值。
+        它有两种用途：
+        1. Maven 和插件约定好的特殊名字（例如下面的 maven.compiler.source），写了以后插件会自动读取并生效。
+        2. 自己定义变量，然后在别处用 ${变量名} 引用。例如定义 <junit.version>6.1.3</junit.version>，
+           依赖里就可以写 <version>${junit.version}</version>，方便统一管理版本。
+    -->
+    <properties>
+        <!--
+            Java 源码语法版本（source）和字节码目标版本（target）
+            source：源代码按哪个 Java 版本的语法检查。
+            target：编译出的 .class 字节码能在哪个版本及以上的 JVM 上运行。
+            两个值一般写成一样，并且不能超过本机安装的 JDK 版本。
+        -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+
+        <!--
+            源代码字符编码
+            告诉编译插件和资源插件：读取 .java 文件和资源文件时按 UTF-8 解码。
+            不写时会使用操作系统默认编码。
+        -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--
+        dependencies：依赖列表，里面每个 dependency 对应一个第三方 jar。
+        Maven 会根据坐标自动从中央仓库下载 jar，并保存到本地仓库，不用手动复制 jar。
+        依赖所需的其他 jar（传递依赖）也会自动下载。
+    -->
+    <dependencies>
+        <!-- Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <!-- groupId、artifactId 和 version 就是 JUnit 的坐标。 -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>6.1.3</version>
+            <!--
+                scope：依赖范围。test 表示只在编译和运行 src/test/java 下的测试代码时可用，
+                src/main/java 里的正式代码不能使用它，打包时也不会包含它。
+                常见取值：compile（默认，到处可用）、test、provided（运行环境已经提供，例如 servlet-api）、runtime（只在运行时需要，例如 JDBC 驱动）。
+                常见错误：在 main 目录的代码里使用 @Test，因为 scope 是 test，所以会编译失败。
+            -->
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
