@@ -81,3 +81,37 @@
 4. 发送SQL语句，并获取返回结果【Statement 发送sql语句到数据库并且取得返回结果】
 5. 结果集解析【结果集解析，将查询结果解析出来】
 6. 资源关闭【释放ResultSet、Statement 、Connection】
+
+### 四、核心API理解
+
+#### 4.1 注册驱动
+
+- ```java
+  Class.forName("com.mysql.cj.jdbc.Driver");
+  ```
+
+- 在 Java 中，当使用 JDBC（Java Database Connectivity）连接数据库时，需要加载数据库特定的驱动程序，以便与数据库进行通信。加载驱动程序的目的是为了注册驱动程序，使得 JDBC API 能够识别并与特定的数据库进行交互。
+
+- 从JDK6开始，不再需要显式地调用 `Class.forName()` 来加载 JDBC 驱动程序，只要在类路径中集成了对应的jar文件，会自动在初始化时注册驱动程序。
+
+#### 4.2 Connection
+
+- Connection接口是JDBC API的重要接口，用于建立与数据库的通信通道。换而言之，Connection对象不为空，则代表一次数据库连接。
+- 在建立连接时，需要指定数据库URL、用户名、密码参数。
+    - URL：jdbc:mysql://localhost:3306/atguigu
+        - jdbc:mysql://IP地址:端口号/数据库名称?参数键值对1&参数键值对2
+- `Connection` 接口还负责管理事务，`Connection` 接口提供了 `commit` 和 `rollback` 方法，用于提交事务和回滚事务。
+- 可以创建 `Statement` 对象，用于执行 SQL 语句并与数据库进行交互。
+- 在使用JDBC技术时，必须要先获取Connection对象，在使用完毕后，要释放资源，避免资源占用浪费及泄漏。
+
+#### 4.3 Statement
+
+[查看 JdbcInjection.java 源代码](./jdbc-demo/src/main/java/com/example/base/JdbcInjection.java)
+
+- `Statement` 接口用于执行 SQL 语句并与数据库进行交互。它是 JDBC API 中的一个重要接口。通过
+  `Statement` 对象，可以向数据库发送 SQL 语句并获取执行结果。
+- 结果可以是一个或多个结果。
+    - 增删改：受影响行数单个结果。
+    - 查询：单行单列、多行多列、单行多列等结果。
+- 但是`Statement` 接口在执行SQL语句时，会产生`SQL注入攻击问题`:
+    - 当使用`Statement` 执行动态构建的 SQL 查询时，往往需要将查询条件与 SQL 语句拼接在一起，直接将参数和SQL语句一并生成，让SQL的查询条件始终为true得到结果。
