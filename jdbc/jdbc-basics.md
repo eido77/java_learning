@@ -115,3 +115,14 @@
     - 查询：单行单列、多行多列、单行多列等结果。
 - 但是`Statement` 接口在执行SQL语句时，会产生`SQL注入攻击问题`:
     - 当使用`Statement` 执行动态构建的 SQL 查询时，往往需要将查询条件与 SQL 语句拼接在一起，直接将参数和SQL语句一并生成，让SQL的查询条件始终为true得到结果。
+
+#### 4.4 PreparedStatement
+
+[查看 JdbcPrepared.java 源代码](./jdbc-demo/src/main/java/com/example/base/JdbcPrepared.java)
+
+- `PreparedStatement`是 `Statement` 接口的子接口，用于执行`预编译`的 SQL 查询，作用如下：
+    - 预编译SQL语句：在创建PreparedStatement时，就会预编译SQL语句，也就是SQL语句已经固定。
+    - 防止SQL注入：
+      `PreparedStatement` 支持参数化查询，将数据作为参数传递到SQL语句中，采用?占位符的方式，将传入的参数用一对单引号包裹起来''，无论传递什么都作为值。有效防止传入关键字或值导致SQL注入问题。
+    - 性能提升：PreparedStatement是预编译SQL语句，同一SQL语句多次执行的情况下，可以复用，不必每次重新编译和解析。
+- 后续的学习我们都是基于PreparedStatement进行实现，更安全、效率更高！
