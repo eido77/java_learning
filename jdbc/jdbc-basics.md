@@ -68,3 +68,16 @@
 数据库初始化脚本：[init.sql](./init.sql)
 
 通过 IDEA 的 Database 工具执行 SQL 脚本，创建 `atguigu` 数据库、`t_emp` 表并插入初始数据。
+
+##### 3.2.2 Java代码
+
+[查看 JdbcQuick.java 源代码](./jdbc-demo/src/main/java/com/example/base/JdbcQuick.java)
+
+#### 3.3 步骤总结
+
+1. 注册驱动【依赖的驱动类，进行安装】
+2. 获取连接【Connection建立连接】
+3. 创建发送SQL语句对象【Connection创建发送SQL语句的Statement】
+4. 发送SQL语句，并获取返回结果【Statement 发送sql语句到数据库并且取得返回结果】
+5. 结果集解析【结果集解析，将查询结果解析出来】
+6. 资源关闭【释放ResultSet、Statement 、Connection】
