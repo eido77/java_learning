@@ -135,7 +135,7 @@ public class JdbcOperationTest {
          */
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO t_emp(emp_name, emp_salary, emp_age) VALUES (?,?,?)");
 
-        preparedStatement.setString(1,"Roes");
+        preparedStatement.setString(1, "Roes");
         /*
          * new BigDecimal(345.67) 传入的是 double，而 double 本身无法精确表示 345.67，
          * 实际得到的是 345.6699999999999590727384202182292938232421875 这样的值。
@@ -159,6 +159,48 @@ public class JdbcOperationTest {
 
         // 根据受影响行数，做判断，得到成功或失败
         // result 是受影响的行数。这里插入一行，成功时 result 为 1，所以用 result > 0 判断是否成功。
+        if (result > 0) {
+            System.out.println("成功");
+        } else {
+            System.out.println("失败");
+        }
+
+        preparedStatement.close();
+        connection.close();
+    }
+
+    @Test
+    public void testUpdate() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "");
+
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE t_emp SET emp_salary = ? WHERE emp_id = ?");
+
+        preparedStatement.setBigDecimal(1, new BigDecimal("888.88"));
+        preparedStatement.setInt(2, 6);
+
+        int result = preparedStatement.executeUpdate();
+
+        if (result > 0) {
+            System.out.println("成功");
+        } else {
+            System.out.println("失败");
+        }
+
+        preparedStatement.close();
+        connection.close();
+    }
+
+    @Test
+    public void testDelete() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "");
+
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM t_emp WHERE emp_id = ?");
+
+        // emp_id 是 INT 类型，但 MySQL 支持不同数值类型之间的隐式转换，因此也能使用 BigDecimal 或 Double 进行数值比较。
+        preparedStatement.setBigDecimal(1, new BigDecimal("6"));
+
+        int result = preparedStatement.executeUpdate();
+
         if (result > 0) {
             System.out.println("成功");
         } else {
