@@ -160,3 +160,40 @@
 #### 5.6 删除
 
 对应方法：`testDelete()`
+
+### 六、常见问题
+
+#### 6.1 资源的管理
+
+> 在使用JDBC的相关资源时，比如Connection、PreparedStatement、ResultSet，使用完毕后，要及时关闭这些资源以释放数据库服务器资源和避免内存泄漏是很重要的。
+
+#### 6.2 SQL语句问题
+
+> java.sql.SQLSyntaxErrorException：SQL语句错误异常，一般有几种可能：
+>
+> 1. SQL语句有错误，检查SQL语句！建议SQL语句在SQL工具中测试后再复制到Java程序中！
+> 2. 连接数据库的URL中，数据库名称编写错误，也会报该异常！
+>
+> ![image-20240223143826507](JDBC.assets/image-20240223143826507.png)
+
+#### 6.3 SQL语句未设置参数问题
+
+> java.sql.SQLException：No value specified for parameter 1
+>
+> 在使用预编译SQL语句时，如果有?占位符，要为每一个占位符赋值，否则报该错误！
+>
+> ![image-20240223143947558](JDBC.assets/image-20240223143947558.png)
+
+#### 6.4 用户名或密码错误问题
+
+> 连接数据库时，如果用户名或密码输入错误，也会报SQLException，容易混淆！所以一定要看清楚异常后面的原因描述
+>
+> ![image-20240223144345939](JDBC.assets/image-20240223144345939.png)
+
+#### 6.5 通信异常
+
+> 在连接数据库的URL中，如果IP或端口写错了，会报如下异常：
+>
+> com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+>
+> ![image-20240227234754309](JDBC.assets/image-20240227234754309.png)
