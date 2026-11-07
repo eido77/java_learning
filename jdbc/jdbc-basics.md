@@ -135,6 +135,12 @@
 
 ### 五、基于PreparedStatement实现CRUD
 
+[查看 JdbcOperationTest.java 源代码](./jdbc-demo/src/test/java/com/example/base/JdbcOperationTest.java)
+
 #### 5.1 查询单行单列
 
-[查看 JdbcOperationTest.java 源代码](./jdbc-demo/src/test/java/com/example/base/JdbcOperationTest.java)
+对应方法：`testQuerySingleRowAndCol()`
+
+#### 5.2 查询单行多列
+
+对应方法：`testQuerySingleRow()`
