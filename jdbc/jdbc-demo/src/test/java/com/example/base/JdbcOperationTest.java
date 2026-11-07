@@ -124,4 +124,48 @@ public class JdbcOperationTest {
         preparedStatement.close();
         connection.close();
     }
+
+    @Test
+    public void testInsert() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "");
+
+        /*
+         * emp_id     int auto_increment comment '员工编号' primary key,
+         * auto_increment 表示自增：插入时不给 emp_id 赋值，MySQL 会自动生成“当前最大计数 + 1”的值。
+         */
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO t_emp(emp_name, emp_salary, emp_age) VALUES (?,?,?)");
+
+        preparedStatement.setString(1,"Roes");
+        /*
+         * new BigDecimal(345.67) 传入的是 double，而 double 本身无法精确表示 345.67，
+         * 实际得到的是 345.6699999999999590727384202182292938232421875 这样的值。
+         * 推荐写法（得到精确的 345.67）：
+         * BigDecimal.valueOf(345.67)
+         */
+        preparedStatement.setBigDecimal(2, new BigDecimal("345.67"));
+        /*
+         * 345.67 是 double 字面量。
+         * BigDecimal 是普通类，不是基本类型的包装类，Java 不会把 double 自动转成 BigDecimal，所以编译会报错。
+         */
+//        preparedStatement.setBigDecimal(2, 345.67);
+        preparedStatement.setInt(3, 28);
+
+        /*
+         * executeUpdate 用来执行 INSERT、UPDATE、DELETE（增删改），返回 int，表示“受影响的行数”。
+         * executeQuery 只用于 SELECT，查询会得到一张结果表，返回 ResultSet，再用 getXxx 读取每列。
+         * INSERT 不会得到结果表，只需要知道改动了几行，所以没有 ResultSet，也就没有 getXxx 的需求。
+         */
+        int result = preparedStatement.executeUpdate();
+
+        // 根据受影响行数，做判断，得到成功或失败
+        // result 是受影响的行数。这里插入一行，成功时 result 为 1，所以用 result > 0 判断是否成功。
+        if (result > 0) {
+            System.out.println("成功");
+        } else {
+            System.out.println("失败");
+        }
+
+        preparedStatement.close();
+        connection.close();
+    }
 }
