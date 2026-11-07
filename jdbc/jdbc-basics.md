@@ -132,3 +132,9 @@
 - `ResultSet`是 JDBC API 中的一个接口，用于表示从数据库中`执行查询语句所返回的结果集`。它提供了一种用于遍历和访问查询结果的方式。
 - 遍历结果：ResultSet可以使用 `next()` 方法将游标移动到结果集的下一行，逐行遍历数据库查询的结果，返回值为boolean类型，true代表有下一行结果，false则代表没有。
 - 获取单列结果：可以通过getXxx的方法获取单列的数据，该方法为重载方法，支持索引和列名进行获取。
+
+### 五、基于PreparedStatement实现CRUD
+
+#### 5.1 查询单行单列
+
+[查看 JdbcOperationTest.java 源代码](./jdbc-demo/src/test/java/com/example/base/JdbcOperationTest.java)
