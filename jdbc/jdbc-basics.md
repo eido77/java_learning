@@ -144,3 +144,7 @@
 #### 5.2 查询单行多列
 
 对应方法：`testQuerySingleRow()`
+
+#### 5.3 查询多行多列
+
+对应方法：`testQueryMoreRow()`

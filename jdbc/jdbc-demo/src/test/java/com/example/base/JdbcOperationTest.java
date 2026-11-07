@@ -100,4 +100,28 @@ public class JdbcOperationTest {
         preparedStatement.close();
         connection.close();
     }
+
+    @Test
+    public void testQueryMoreRow() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "");
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT emp_id,emp_name,emp_salary,emp_age FROM t_emp WHERE emp_age > ?");
+
+        // 为占位符赋值，执行SQL语句，接受结果
+        preparedStatement.setInt(1, 25);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            int empId = resultSet.getInt("emp_id");
+            String empName = resultSet.getString("emp_name");
+            BigDecimal empSalary = resultSet.getBigDecimal("emp_salary");
+            int empAge = resultSet.getInt("emp_age");
+
+            System.out.println(empId + "\t" + empName + "\t" + empSalary + "\t" + empAge);
+        }
+
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
+    }
 }
