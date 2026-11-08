@@ -191,4 +191,91 @@ public class testJdbcAdvanced {
         preparedStatement.close();
         connection.close();
     }
+
+    @Test
+    public void testMoresInsert() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu", "root", "");
+        String sql = "INSERT INTO t_emp (emp_name, emp_salary, emp_age) VALUES (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        // 获取当前行代码执行的时间。毫秒值
+        long start = System.currentTimeMillis();
+
+        for (int i = 0; i < 10000; i++) {
+            preparedStatement.setString(1, "Marry" + i);
+            preparedStatement.setDouble(2, 100.0 + i);
+            preparedStatement.setInt(3, 20 + i);
+
+            /*
+             * executeUpdate()：把这条 SQL 发给数据库执行。
+             * 签名：int executeUpdate() throws SQLException，返回值是受影响的行数，这里每次是 1。
+             * 【前面不写 int update =】
+             * 因为 Java 允许忽略方法的返回值。返回值照样存在，只是这里不需要用。
+             */
+            preparedStatement.executeUpdate();
+        }
+
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+
+        preparedStatement.close();
+        connection.close();
+    }
+
+    // 测试批处理
+    @Test
+    public void testBatch() throws SQLException {
+        /*
+         * 注意：1、必须在连接数据库的URL后面追加?rewriteBatchedStatements=true，允许批量操作
+         *      2、新增SQL必须用VALUES。且语句最后不要追加;结束
+         *      3、调用addBatch()方法，将SQL语句进行批量添加操作
+         *      4、统一执行批量操作，调用executeBatch()
+         */
+
+        /*
+         * ? 后面是 URL 参数，用来给 MySQL 驱动传配置。
+         * rewriteBatchedStatements=true 的意思是“允许驱动改写批量语句”。
+         * 不加这个参数时，addBatch() 攒的 10000 条 SQL 会被驱动一条条发送，速度提升不明显。
+         * 加上以后，驱动会把它们合并成少量多值 INSERT，例如：
+         * INSERT INTO t_emp (...) VALUES (?,?,?),(?,?,?),(?,?,?)...
+         */
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///atguigu?rewriteBatchedStatements=true", "root", "");
+
+        /*
+         * 【不能加分号】
+         * 驱动会在末尾拼接 ,(?,?,?)。加了分号会变成 VALUES (?,?,?);,(?,?,?)，SQL 语法错误。
+         */
+        String sql = "INSERT INTO t_emp (emp_name, emp_salary, emp_age) VALUES (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        // 获取当前行代码执行的时间。毫秒值
+        long start = System.currentTimeMillis();
+
+        for (int i = 0; i < 10000; i++) {
+            // 为占位符赋值
+            preparedStatement.setString(1, "Marry" + i);
+            preparedStatement.setDouble(2, 100.0 + i);
+            preparedStatement.setInt(3, 20 + i);
+
+            /*
+             * 签名：void addBatch() throws SQLException。
+             * 作用：不立刻执行，而是把当前这组占位符参数存进“批次”。
+             * 没有返回值（void），因为这时 SQL 还没执行，自然没有“影响了几行”的结果。
+             */
+            preparedStatement.addBatch();
+        }
+
+        // 执行批量操作
+        /*
+         * 签名：int[] executeBatch() throws SQLException。
+         * 作用：把 addBatch() 攒下的所有参数组一次性发给数据库执行。
+         */
+        preparedStatement.executeBatch();
+
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+
+        preparedStatement.close();
+        connection.close();
+    }
 }

@@ -15,3 +15,15 @@
 - 在数据中，执行新增操作时，主键列为自动增长，可以在表中直观的看到，但是在Java程序中，我们执行完新增后，只能得到受影响行数，无法得知当前新增数据的主键值。在Java程序中获取数据库中插入新数据后的主键值，并赋值给Java对象，此操作为主键回显。
 
 - 代码实现：[testReturnPK()](jdbc-demo/src/test/java/com/example/advanced/testJdbcAdvanced.java)
+
+#### 7.3 批量操作
+
+- 插入多条数据时，一条一条发送给数据库执行，效率低下！
+
+- 通过批量操作，可以提升多次操作效率！
+
+- 代码实现：
+-
+    - 普通插入：[testMoresInsert()](jdbc-demo/src/test/java/com/example/advanced/testJdbcAdvanced.java)
+-
+    - 批量插入：[testBatch()](jdbc-demo/src/test/java/com/example/advanced/testJdbcAdvanced.java)
