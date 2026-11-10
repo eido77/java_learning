@@ -113,3 +113,33 @@ JDBC 的数据库连接池使用 javax.sql.DataSource接口进行规范，所有
 | exceptionSorter               |        | 根据dbType自动识别 当数据库抛出一些不可恢复的异常时，抛弃连接                                                                                        |
 | filters                       |        | 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall                                       |
 | proxyFilters                  |        | 类型是List，如果同时配置了filters和proxyFilters，是组合关系，并非替换关系                                                                          |
+
+#### 8.6 HikariCP连接池使用
+
+- 使用步骤：
+    - 引入jar包。
+    - 编码。
+
+- 代码实现：
+
+    - 硬编码方式（了解）：[testHardCodeHikari()](jdbc-demo/src/test/java/com/example/advanced/pool/HikariTest.java)
+
+    - 软编码方式（推荐）：
+
+        - 配置文件：[hikari.properties](jdbc-demo/src/test/resources/hikari.properties)
+
+        - Java代码：[testResourcesHikari()](jdbc-demo/src/test/java/com/example/advanced/pool/HikariTest.java)
+
+#### 8.7 HikariCP其他配置【了解】
+
+| 属性                  | 默认值          | 说明                                                           |
+|---------------------|--------------|--------------------------------------------------------------|
+| isAutoCommit        | true         | 自动提交从池中返回的连接                                                 |
+| connectionTimeout   | 30000        | 等待来自池的连接的最大毫秒数                                               |
+| maxLifetime         | 1800000      | 池中连接最长生命周期如果不等于0且小于30秒则会被重置回30分钟                             |
+| minimumIdle         | 10           | 池中维护的最小空闲连接数 minIdle<0或者minIdle>maxPoolSize，则被重置为maxPoolSize |
+| maximumPoolSize     | 10           | 池中最大连接数，包括闲置和使用中的连接                                          |
+| metricRegistry      | null         | 连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置                       |
+| healthCheckRegistry | null         | 报告当前健康信息                                                     |
+| poolName            | HikariPool-1 | 连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置                       |
+| idleTimeout         |              | 是允许连接在连接池中空闲的最长时间                                            |
