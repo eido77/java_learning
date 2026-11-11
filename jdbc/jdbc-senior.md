@@ -14,7 +14,7 @@
 
 - 配置文件：[db.properties](jdbc-demo/src/main/resources/db.properties)
 - 工具类代码：[JdbcUtil.java](jdbc-demo/src/main/java/com/example/senior/util/JdbcUtil.java)
-- 测试代码：[JdbcUtilTest.java](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
+- 测试代码：[JdbcUtilTest.java【testGetConnection()】](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
 - 注意：此种封装方式，无法保证单个请求线程多次操作数据库时使用同一个连接，因此无法保证事务！
 
 #### 9.3 ThreadLocal
@@ -37,3 +37,10 @@
 > 3、ThreadLocal对象.remove: 移除ThreadLocal中当前线程共享变量的值。
 
 ![image-20240223104919548](JDBC.assets/image-20240223104919548.png)
+
+#### 9.4 JDBC工具类封装V2.0
+
+> 在V1.0的版本基础上，我们将连接对象放在每个线程的ThreadLocal中，保证从头到尾当前线程操作的是同一连接对象。
+
+- 工具类代码：[JdbcUtilV2.java](jdbc-demo/src/main/java/com/example/senior/util/JdbcUtilV2.java)
+- 测试代码：[JdbcUtilTest.java【testJdbcV2()】](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
