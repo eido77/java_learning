@@ -8,7 +8,7 @@
 - MySQL 8.4 LTS
 
 ## Learning Resources
-- Java SE: [Atguigu (尚硅谷) — Song Hongkang's Java Tutorial](https://www.bilibili.com/video/BV1PY411e7J6/)
+- Java SE: [Atguigu (尚硅谷) — Song Hongkang's Java Tutorial](https://www.bilibili.com/video/BV1PY411e7J6/) · [Source Code](./src/)
 - MySQL: [Heima (黑马程序员) — MySQL Tutorial](https://www.bilibili.com/video/BV1Kr4y1i7ru/)
 - Maven: [Atguigu (尚硅谷) — Maven Tutorial](https://www.bilibili.com/video/BV1JN411G7gX/)
 - JDBC: [Atguigu (尚硅谷) — JDBC Tutorial](https://www.bilibili.com/video/BV1Tx421S7HZ/)
