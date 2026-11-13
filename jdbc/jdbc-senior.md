@@ -44,3 +44,38 @@
 
 - 工具类代码：[JdbcUtilV2.java](jdbc-demo/src/main/java/com/example/senior/util/JdbcUtilV2.java)
 - 测试代码：[JdbcUtilTest.java【testJdbcV2()】](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
+
+### 十、DAO封装及BaseDAO工具类
+
+#### 10.1 DAO概念
+
+> DAO：Data Access Object，数据访问对象。
+>
+> Java是面向对象语言，数据在Java中通常以对象的形式存在。一张表对应一个实体类，一张表的操作对应一个DAO对象！
+>
+> 在Java操作数据库时，我们会将对同一张表的增删改查操作统一维护起来，维护的这个类就是DAO层。
+>
+> DAO层只关注对数据库的操作，供业务层Service调用，将职责划分清楚！
+
+#### 10.2 BaseDAO概念
+
+> 基本上每一个数据表都应该有一个对应的DAO接口及其实现类，发现对所有表的操作（增、删、改、查）代码重复度很高，所以可以抽取公共代码，给这些DAO的实现类可以抽取一个公共的父类，复用增删改查的基本操作，我们称为BaseDAO。
+
+#### 10.3 BaseDAO搭建
+
+- BaseDAO代码：[BaseDao.java](jdbc-demo/src/main/java/com/example/senior/dao/BaseDao.java)
+
+#### 10.4 BaseDAO的应用
+
+##### 10.4.1 创建员工DAO接口
+
+- DAO接口：[EmployeeDao.java](jdbc-demo/src/main/java/com/example/senior/dao/EmployeeDao.java)
+
+##### 10.4.2 创建员工DAO接口实现类
+
+- DAO实现类：[EmployeeDaoImpl.java](jdbc-demo/src/main/java/com/example/senior/dao/impl/EmployeeDaoImpl.java)
+- 实体类：[Employee.java](jdbc-demo/src/main/java/com/example/senior/pojo/Employee.java)
+
+##### 10.4.3 DAO测试
+
+- 测试代码：[JdbcUtilTest.java【testEmployeeDao()】](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
