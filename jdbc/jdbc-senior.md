@@ -79,3 +79,32 @@
 ##### 10.4.3 DAO测试
 
 - 测试代码：[JdbcUtilTest.java【testEmployeeDao()】](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
+
+### 十一、事务
+
+#### 11.1 事务回顾
+
+- 数据库事务就是一种SQL语句执行的缓存机制，不会单条执行完毕就更新数据库数据，最终根据缓存内的多条语句执行结果统一判定!   一个事务内所有语句都成功及事务成功，我们可以触发commit提交事务来结束事务，更新数据!   一个事务内任意一条语句失败，即为事务失败，我们可以触发rollback回滚结束事务，数据回到事务之前状态!
+- 一个业务涉及多条修改数据库语句!   例如:
+    - 经典的转账案例，转账业务(A账户减钱和B账户加钱，要一起成功)
+    - 批量删除(涉及多个删除)
+    - 批量添加(涉及多个插入)
+- 事务的特性：
+    1. 原子性（Atomicity）原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生， 要么都不发生。
+    2. 一致性（Consistency）事务必须使数据库从一个一致性状态变换到另外一个一致性状态。
+    3. 隔离性（Isolation）事务的隔离性是指一个事务的执行不能被其他事务干扰， 即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。
+    4. 持久性（Durability）持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的， 接下来的其他操作和数据库故障不应该对其有任何影响
+- 事务的提交方式：
+    - 自动提交：每条语句自动存储一个事务中，执行成功自动提交，执行失败自动回滚!
+    - 手动提交:  手动开启事务，添加语句，手动提交或者手动回滚即可!
+
+#### 11.2 JDBC事务代码实现
+
+- 数据库表：[init.sql](init.sql)
+- DAO接口：[BankDao.java](jdbc-demo/src/main/java/com/example/senior/dao/BankDao.java)
+- DAO实现类：[BankDaoImpl.java](jdbc-demo/src/main/java/com/example/senior/dao/impl/BankDaoImpl.java)
+- 测试代码：[JdbcUtilTest.java](jdbc-demo/src/test/java/com/example/senior/JdbcUtilTest.java)
+
+**注意：**
+
+> 开启事务后，根据代码执行结果来决定提交或回滚！否则数据库看不到数据的操作结果！

@@ -17,6 +17,7 @@ import java.util.List;
 public class BaseDao {
     /**
      * 通用的增删改的方法。
+     *
      * @param sql    调用者要执行的SQL语句
      * @param params SQL语句中的占位符要赋值的参数
      * @return 受影响的行数
@@ -56,7 +57,12 @@ public class BaseDao {
 
         // 5.释放资源
         preparedStatement.close();
-        JdbcUtilV2.release();
+
+        // getAutoCommit() 签名：boolean getAutoCommit() throws SQLException，判断当前连接是否为自动提交模式。
+        // true：操作完成后释放连接；false：保留连接，供后续事务提交或回滚使用。
+        if (connection.getAutoCommit()) {
+            JdbcUtilV2.release();
+        }
 
         // 6.返回结果
         return row;
@@ -156,7 +162,11 @@ public class BaseDao {
         }
         resultSet.close();
         preparedStatement.close();
-        JdbcUtilV2.release();
+
+        if (connection.getAutoCommit()) {
+            JdbcUtilV2.release();
+        }
+
         return list;
     }
 
