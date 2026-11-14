@@ -170,7 +170,28 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 ## 2.4 列表标签
 
 > 有序列表 分条列项展示数据的标签, 其每一项前面的符号带有顺序特征
-> 
+>
 > 无序列表 分条列项展示数据的标签, 其每一项前面的符号不带有顺序特征
-> 
+>
 > 嵌套列表 列表和列表之间可以嵌套,实现某一项内容详细展示
+
+## 2.5 超链接标签
+
+> 点击后带有链接跳转的标签 ,也叫作a标签
+
++ href属性用于定义连接
+    + href中可以使用绝对路径,以/开头,始终以一个固定路径作为基准路径作为出发点
+    + href中也可以使用相对路径,不以/开头,以当前文件所在路径为出发点
+    + href中也可以定义完整的URL
+
++ target用于定义打开的方式
+    + _blank 在新窗口中打开目标资源
+    + _self 在当前窗口中打开目标资源
+
+示例代码：
+
+[超链接标签](../src/main/java/com/example/phase1/hyperlinks.html)
+
+[test.html](../src/main/java/com/example/phase1/pages/test.html)
+
+[test2.html](../src/main/java/com/example/phase1/pages/a/test2.html)
