@@ -2,6 +2,12 @@
 
 # 一 HTML入门
 
+IDEA 快捷输入：
+
+! + Tab：快速生成 HTML5 基本结构
+
+c + Tab：快速生成 HTML 注释
+
 ## 1.1 HTML&CSS&JavaScript的作用
 
 > HTML 主要用于网页主体结构的搭建
@@ -139,7 +145,11 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 
 # 二 HTML常见标签
 
-示例代码：[2.1–2.3 标题、段落与换行标签](../src/main/java/com/example/phase1/heading-paragraph-line-break.html)
+示例代码：
+
+[2.1–2.3 标题、段落与换行标签](../src/main/java/com/example/phase1/heading-paragraph-line-break.html)
+
+[2.4 列表标签](../src/main/java/com/example/phase1/ordered-unordered-lists.html)
 
 ## 2.1 标题标签
 
@@ -156,3 +166,11 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 ## 2.3 换行标签
 
 > 单纯实现换行的标签是br,如果想添加分隔线,可以使用hr标签
+
+## 2.4 列表标签
+
+> 有序列表 分条列项展示数据的标签, 其每一项前面的符号带有顺序特征
+> 
+> 无序列表 分条列项展示数据的标签, 其每一项前面的符号不带有顺序特征
+> 
+> 嵌套列表 列表和列表之间可以嵌套,实现某一项内容详细展示
