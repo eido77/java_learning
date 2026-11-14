@@ -62,7 +62,7 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 
 ```HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+  "http://www.w3.org/TR/html4/loose.dtd">
 ```
 
 + HTML5版本的文档类型声明是：
@@ -136,3 +136,23 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 + 7 HTML标签不严格区分大小写,但是不能大小写混用
 
 + 8 HTML中不允许自定义标签名,强行自定义则无效
+
+# 二 HTML常见标签
+
+示例代码：[2.1–2.3 标题、段落与换行标签](../src/main/java/com/example/phase1/heading-paragraph-line-break.html)
+
+## 2.1 标题标签
+
+> 标题标签一般用于在页面上定义一些标题性的内容,如新闻标题,文章标题等,有h1到h6六级标题
+
++ 效果
+
+![1681179289089](images/1681179289089.png)
+
+## 2.2 段落标签
+
+> 段落标签一般用于定义一些在页面上要显示的大段文字,多个段落标签之间实现自动分段的效果
+
+## 2.3 换行标签
+
+> 单纯实现换行的标签是br,如果想添加分隔线,可以使用hr标签
