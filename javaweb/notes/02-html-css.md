@@ -199,11 +199,27 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 ## 2.6 多媒体标签
 
 > img(重点) 图片标签,用于在页面上引入图片
-> 
+>
 > 示例代码：[图片标签示例](../src/main/java/com/example/phase1/images.html)
 
 > audio 用于在页面上引入一段声音
-> 
+>
 > video 用于在页面上引入一段视频
-> 
+>
 > 示例代码：[音频和视频标签示例](../src/main/java/com/example/phase1/multimedia.html)
+
+## 2.7 表格标签（重点）
+
+> 常规表格
+
++ 使用 `table`、`tr`、`th`、`td` 等标签构建表格。
+
+> 单元格跨行
+
++ 通过单元格的 `rowspan` 属性实现上下跨行。
+
+> 单元格跨列
+
++ 通过单元格的 `colspan` 属性实现左右跨列。
+
+> 示例代码：[表格标签示例](../src/main/java/com/example/phase1/tables.html)
