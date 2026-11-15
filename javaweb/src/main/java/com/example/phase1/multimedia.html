@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+      audio 标签：在页面中播放声音，是双标签，必须写 </audio>
+        src       声音资源的路径，可用 URL、相对路径、绝对路径。
+        controls  显示播放控制面板，不写则看不到播放器。默认值：不显示
+        autoplay  打开页面时自动播放，带声音时常被浏览器拦截。默认值：不自动播放
+        loop      用于控制是否进行循环播放。默认值：不循环，播完就停
+        preload   是否提前加载，常用值 none、metadata、auto。默认值：由浏览器决定，规范建议 metadata，不同浏览器可能不同
+
+      video 标签：在页面中播放视频，是双标签，必须写 </video>
+        src       视频资源的路径，可用 URL、相对路径、绝对路径。
+        controls  显示播放控制面板，不写则看不到播放器。默认值：不显示
+        autoplay  打开页面时自动播放，带声音时常被浏览器拦截。默认值：不自动播放
+        loop      用于控制是否进行循环播放。默认值：不循环，播完就停
+        muted     静音播放，多数浏览器只允许静音的视频自动播放。默认值：不静音
+        width     显示宽度，写纯数字，单位是 px，如 width="400"。默认值：无固定数值，按视频原始宽度显示，视频信息加载前约为 300px
+        height    显示高度，写纯数字，只设置宽或高其中一个时，另一个按原比例自动计算。默认值：无固定数值，按视频原始高度显示，视频信息加载前约为 150px
+        poster    视频播放前显示的封面图。默认值：无，不写时通常显示视频的第一帧，具体由浏览器决定
+        preload   是否提前加载，常用值 none、metadata、auto。默认值：由浏览器决定，规范建议 metadata，不同浏览器可能不同
+
+      布尔属性（controls、autoplay、loop、muted）的规律：写了就是开启，不写就是关闭，所以它们的默认值都是关闭。
+
+      布尔属性可以直接写属性名，不需要填写属性值，这是 HTML 推荐的简写形式。
+      例如：controls 与 controls="controls" 完全等效，推荐使用 controls。
+      不要使用 controls="false" 来关闭属性，即使写了 false，浏览器仍会将其视为开启。
+
+      本例中只有 controls、autoplay、loop、muted 这四个属性可以直接简写。
+    -->
+
+    <!-- 音频 -->
+    <audio src="./media/sample-audio.wav" controls></audio>
+    <audio src="./media/sample-audio.wav" autoplay controls loop></audio>
+
+    <!-- 视频 -->
+    <video src="./media/sample-video.mp4" controls width="400"></video>
+    <video src="./media/sample-video.mp4" autoplay controls loop width="400"></video>
+  </body>
+</html>

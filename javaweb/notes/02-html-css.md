@@ -195,3 +195,15 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 [test.html](../src/main/java/com/example/phase1/pages/test.html)
 
 [test2.html](../src/main/java/com/example/phase1/pages/a/test2.html)
+
+## 2.6 多媒体标签
+
+> img(重点) 图片标签,用于在页面上引入图片
+> 
+> 示例代码：[图片标签示例](../src/main/java/com/example/phase1/images.html)
+
+> audio 用于在页面上引入一段声音
+> 
+> video 用于在页面上引入一段视频
+> 
+> 示例代码：[音频和视频标签示例](../src/main/java/com/example/phase1/multimedia.html)
