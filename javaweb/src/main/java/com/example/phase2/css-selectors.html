@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*
+         1 元素选择器：按标签名匹配所有同名元素，适合设置页面的基础样式。
+         语法：标签名 {}。
+         缺点：范围太宽，同名元素无法区别对待，不同名元素也无法共用同一套样式。
+         2 id 选择器：按元素的 id 属性值匹配，
+         语法：#id值 {}。
+         注意：id 是可选属性，并非每个元素都有；同一页面中 id 必须唯一，所以一条规则只能作用于一个元素。
+         id 选择器优先级高、不易被覆盖，不适合写可复用样式，更多用于 JS 获取元素和页面锚点。
+         3 class 选择器：按元素的 class 属性值匹配。
+         语法：.class属性值{}（推荐）。
+         class 值可以重复使用，一个元素可以写多个 class（空格分隔，如 class="a b c"），便于组合复用。
+         优先级从高到低：行内 style，id 选择器，class 选择器，元素选择器；优先级相同时，样式表中靠后的规则覆盖靠前的规则。
+         */
+        /* 元素选择器 */
+        input {
+            width: 80px;
+            height: 40px;
+            background-color: yellowgreen;
+            color: black;
+            border: 3px solid aqua;
+            font-size: 20px;
+            font-family: "隶书", serif;
+            line-height: 30px;
+            border-radius: 30px;
+        }
+
+        /* id选择器 */
+        #btn5 {
+            width: 80px;
+            height: 40px;
+            background-color: yellowgreen;
+            color: black;
+            border: 3px solid aqua;
+            font-size: 20px;
+            font-family: "隶书";
+            line-height: 30px;
+            border-radius: 30px;
+        }
+
+        /* .class选择器 */
+        /* class 属性中的书写顺序不影响优先级；只有同等优先级的规则发生冲突时，样式表中靠后的规则才会覆盖靠前的规则。 */
+        .shapeClass {
+            width: 80px;
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        .colorClass {
+            background-color: yellowgreen;
+            color: white;
+            border: 3px solid aqua;
+        }
+
+        .fontClass {
+            font-size: 20px;
+            font-family: Helvetica, sans-serif;
+            line-height: 30px;
+        }
+    </style>
+  </head>
+  <body>
+    <input id="btn1"
+           type="button"
+           value="按钮">
+    <input id="btn2"
+           type="button"
+           value="按钮">
+    <input id="btn3"
+           type="button"
+           value="按钮">
+    <input id="btn4"
+           type="button"
+           value="按钮">
+    <button id="btn5"
+            type="button">按钮
+    </button>
+
+    <button class="colorClass fontClass shapeClass"
+            type="button">按钮
+    </button>
+    <input class="fontClass"
+           type="button"
+           value="按钮">
+  </body>
+</html>

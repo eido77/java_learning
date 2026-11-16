@@ -275,3 +275,9 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 
 - [CSS 引入方式示例](../src/main/java/com/example/phase2/css-inclusion-methods.html)
 - [button.css](../src/main/java/com/example/phase2/css/button.css)
+
+## 3.2 CSS选择器
+
+> 常见选择器：元素选择器、ID 选择器、class 选择器。
+
+- [CSS 选择器示例](../src/main/java/com/example/phase2/css-selectors.html)
