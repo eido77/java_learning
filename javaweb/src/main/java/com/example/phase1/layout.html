@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body style="background-color: cadetblue">
+    <!--
+      一、CSS 行内样式
+        写法：style="样式名:样式值; 样式名:样式值"
+        例子：<div style="color: red; font-size: 20px;">文字</div>
+
+      二、块元素（block）
+        特点：独占一行；默认宽度撑满父元素；width、height、margin、padding 都生效
+        常见：div、p、h1~h6、ul、ol、li、table、form
+
+      三、行内元素（inline）
+        特点：不独占一行，挨着排；大小由内容决定；width、height 无效；上下 margin 无效
+        常见：span、a、strong、em、label
+        例外：img、input、button、select、textarea 虽然也在同一行排列，但 width、height 有效
+
+      四、嵌套规则
+        块元素里可以放行内元素（div 里放 span，常见）；
+        块元素里也可以放块元素（div 里放 div，最常见的布局写法）；
+        行内元素里不应放块元素（span 里放 div，不规范）。
+        注意：p 标签里不能放 div，浏览器会自动把 p 提前结束，导致页面结构错乱。
+    -->
+    <!-- margin: 10px auto 表示上下外边距 10px、左右自动。块元素设置了固定宽度后，左右 auto 会让它水平居中。 -->
+    <div style="border: 1px solid red; width: 500px;height: 200px;margin: 10px auto;background-color: aliceblue;">123</div>
+    <div style="border: 1px solid red; width: 500px;height: 200px;margin: 10px auto;background-color: aquamarine;">456</div>
+    <div style="border: 1px solid red; width: 500px;height: 200px;margin: 10px auto;background-color: yellow;">
+      <span style="font-size: 30px;color: aqua;font-weight: bold;">我已经老了，</span>
+      有一天，在一处公共场所的大厅里，有一个男人向我走来。他主动介绍自己，他对我说：“我认识你，永远记得你。
+    </div>
+
+    <!-- 边框 green 生效，但 width: 500px 与 height: 100px 不生效。 -->
+    <span style="border: 1px solid green; width: 500px;height: 100px;">555</span>
+  </body>
+</html>

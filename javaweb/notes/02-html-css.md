@@ -232,10 +232,16 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 
 > 常见表单项：单行文本框、密码框、单选框、复选框、下拉框、按钮、隐藏域、多行文本框、文件选择框。
 
----
-
 示例代码：
 
 + [表单标签及常见表单项示例（form.html）](../src/main/java/com/example/phase1/form.html)
 
 + [表单提交后的目标页面（welcome.html）](../src/main/java/com/example/phase1/welcome.html)
+
+## 2.10 布局相关标签
+
+> div标签  俗称"块",主要用于划分页面结构,做页面布局
+> 
+> span标签 俗称"层",主要用于划分元素范围,配合CSS做页面元素样式的修饰
+>
+> 示例代码：[页面布局示例](../src/main/java/com/example/phase1/layout.html)
