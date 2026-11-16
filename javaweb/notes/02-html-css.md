@@ -241,7 +241,21 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 ## 2.10 布局相关标签
 
 > div标签  俗称"块",主要用于划分页面结构,做页面布局
-> 
+>
 > span标签 俗称"层",主要用于划分元素范围,配合CSS做页面元素样式的修饰
 >
 > 示例代码：[页面布局示例](../src/main/java/com/example/phase1/layout.html)
+
+## 2.11 特殊字符
+
+> 对于有特殊含义的字符,需要通过转移字符来表示
+
+<img src="images/1681200435834.png" alt="1681200435834"  />
+
+<img src="images/1681200467767.png" alt="1681200467767"  />
+
+<img src="images/1681200487125.png" alt="1681200487125"  />
+
+<img src="images/1681200503798.png" alt="1681200503798"  />
+
+示例代码：[特殊字符示例](../src/main/java/com/example/phase1/special-characters.html)
