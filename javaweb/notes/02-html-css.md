@@ -223,3 +223,19 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 + 通过单元格的 `colspan` 属性实现左右跨列。
 
 > 示例代码：[表格标签示例](../src/main/java/com/example/phase1/tables.html)
+
+## 2.8 表单标签（重点）
+
+> form 表单标签，用于让用户在页面上输入各种信息并提交，是向服务端发送数据的主要方式之一。
+
+## 2.9 常见表单项标签（重点）
+
+> 常见表单项：单行文本框、密码框、单选框、复选框、下拉框、按钮、隐藏域、多行文本框、文件选择框。
+
+---
+
+示例代码：
+
++ [表单标签及常见表单项示例（form.html）](../src/main/java/com/example/phase1/form.html)
+
++ [表单提交后的目标页面（welcome.html）](../src/main/java/com/example/phase1/welcome.html)

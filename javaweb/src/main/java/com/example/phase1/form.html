@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+      一、form 表单标签
+        action 定义数据的提交地址
+          1.url
+          2.相对路径
+          3.绝对路径
+        method 定义数据的提交方式，不写默认是 get
+          get
+            1.参数以键值对形式拼在 url 后提交：url?key=value&key=value
+            2.数据直接暴露在地址栏上，还会留在浏览器历史和服务器日志中，不安全，不能用来提交密码等敏感信息
+            3.url 长度有限制，所以提交的数据量不大
+            4.url 中只能是文本字符；文件上传框用 get 提交时只会提交文件名，不会提交文件内容
+            5.一般用于查询
+          post
+            1.参数默认不放到 url 后
+            2.参数不直接暴露在地址栏上，相对 get 更不易被看到；但不加密，真正的安全需要 HTTPS
+            3.数据放在请求体中发送，提交的数据量比较大
+            4.请求体中可以是文本，也可以是字节数据，可以提交文件（上传文件需要 method="post" 并设置 enctype="multipart/form-data"）
+            5.一般用于登录、注册、新增等会改变数据的提交
+      二、表单项标签
+        1.要提交的表单项必须定义 name 属性，name 是提交时的参数名
+        2.value 是提交时的参数值：
+          text、password、textarea 由用户输入，value 只是初始值，可以不写
+          radio、checkbox、option 必须写 value 来区分各选项（radio、checkbox 不写则提交 on）
+        3.提交条件：在 form 内、有 name、没有 disabled；radio、checkbox 还必须被选中
+        input
+          type 输入信息的表单项类型
+            text     单行普通文本框
+            password 密码框（只是把字符显示成圆点，不加密）
+            submit   提交按钮
+            reset    重置按钮（把表单恢复成初始状态）
+            radio    单选框，多个选项选其一（相同的 name 才会互斥）
+            checkbox 复选框，多个选项选多个（相同的 name 提交时会产生多个同名参数）
+            hidden   隐藏域，不显示在页面上，提交时会携带
+            file     文件上传框
+        textarea 文本域 多行文本框（双标签，标签中间的内容就是初始值）
+        select 下拉框
+          option 选项（标签中间是显示给用户的文字，value 是提交的值）
+      三、常用布尔属性（写属性名即可，不需要写 =）
+        readonly 只读：能看、能选中复制、不能改，提交时携带（仅对文本类输入有效）
+        disabled 不可用：置灰、不能操作，提交时不携带
+        checked  radio、checkbox 默认选中
+        selected option 默认选中
+    -->
+    <form action="welcome.html" method="get">
+      <!-- 添加表单项标签 用户输入信息的标签 -->
+      <!-- 表单项要被提交，需同时满足：在 form 内、有 name、没有 disabled；radio、checkbox 还必须被选中。 -->
+      <!--
+        name 是提交时的参数名（键），value 是提交时的参数值，提交时组成 name=value。
+        hidden 隐藏域不显示在页面上，但提交时会携带，常用来传递用户不需要看到或修改的数据。
+        隐藏域可以被用户用开发者工具修改，不安全，后端不能完全信任它的值。
+      -->
+      <input type="hidden" name="id" value="123">
+
+      <!--
+        readonly
+        内容显示给用户看，但用户不能修改；提交时会携带 pid=456；输入框还能被选中复制。
+        段落、文本不是表单项，不会随表单提交；既要展示又要提交，就用 readonly。
+        readonly 只对文本类输入（text、password、textarea 等）有效，对 radio、checkbox、select 无效。
+      -->
+      <input type="text" name="pid" value="456" readonly>
+      <br>
+      <!--
+        disabled 表示控件不可用：显示为灰色，不能点击、不能获得焦点，提交时不携带。
+        readonly 可聚焦、可选中复制、会提交；disabled 不可操作、不提交。
+      -->
+      <input type="text" name="tid" value="789" disabled>
+      <br>
+
+      <!--
+        带 name 会提交 username=输入的内容，不带 name 则这个输入框不提交。
+        get 是明文放在 url 后的，加上 name 之后就会变成 username=xxx&password=xxx。
+        对 text 输入框来说，value 是初始显示的内容。
+      -->
+      用户名：<input type="text" name="username" value="xiaoming">
+      <br>
+      密码：<input type="password" name="password">
+      <br>
+
+      <!--
+        提交的格式永远是 name=value，name 是等号前面的参数名，value 是等号后面的参数值。
+        radio、checkbox 不写 value 时，选中后提交的默认值是字符串 on，所以男女都是 gender=on，无法区分。
+        value 在不同控件里含义不同：text 里是初始显示的内容；radio、checkbox、option 里是"选中后提交的值"，并不显示在页面上。
+      -->
+      性别：
+      <!-- 同一组 radio（name 相同）只能选中一个。如果两个都写了 checked，浏览器最终只保留最后一个。 -->
+      <input type="radio" name="gender" value="1" checked> 男
+      <input type="radio" name="gender" value="0"> 女
+      <br>
+
+      爱好：
+      <!--
+        name 是提交时的参数名，同时也让这 4 个复选框属于同一组 hobby。
+        只有被勾选的项才会以 hobby=value 的形式提交，没勾选的不提交。
+        多选项必须写 value，否则全是 on，无法区分。
+      -->
+      <input type="checkbox" name="hobby" value="1" checked>篮球
+      <input type="checkbox" name="hobby" value="2" checked>足球
+      <input type="checkbox" name="hobby" value="3">羽毛球
+      <input type="checkbox" name="hobby" value="4">乒乓球
+      <br>
+
+      个人简介：
+      <!--
+        style 属性里写的是 CSS。CSS 中除 0 以外的长度必须带单位，写 width: 300 是无效的。
+        textarea 没有 value 属性，它的值写在开始标签和结束标签之间，这就是它的初始值（默认值），本例是 123。
+        textarea 是多行文本框，它的值是标签中间的文本（可以包含换行），无法用单个 value 属性表示，所以设计成双标签。
+      -->
+      <textarea name="intro" style="width: 300px;height: 100px;">123</textarea>
+      <br>
+
+      籍贯：
+      <select name="province">
+        <!--
+          selected 用于下拉框的 option，表示默认选中；checked 用于 radio、checkbox。
+          select 如果没有任何 option 写 selected，浏览器默认选中第一项。
+        -->
+        <option value="" disabled selected>---请选择---</option>
+        <option value="bj">北京</option>
+        <option value="tj">天津</option>
+        <option value="hb">河北</option>
+      </select>
+      <br>
+
+      选择头像：
+      <input type="file" name="avatar">
+      <br>
+
+      <!--
+        【input 按钮和 button 按钮的区别】
+        input 是单标签，按钮文字写在 value 属性里；button 是双标签，按钮文字写在标签中间。
+        button 中间可以放图片、加粗文字等其他内容，input 只能是纯文字。
+        button 不写 type 时默认是 submit。
+      -->
+      <!-- 点击后浏览器提交所在的 form：收集所有有 name、没有 disabled 的表单项，按 form 的 action 和 method 发出去。 -->
+      <input type="submit" value="登录">
+      <!-- 点击后把表单所有项恢复为初始状态，不发送数据，页面也不跳转。 -->
+      <input type="reset" value="清空">
+      <!--
+        input 写法的普通按钮。
+        点击后没有任何效果，既不提交也不重置，JavaScript给它绑定单击事件才有功能。
+       -->
+      <input type="button" value="普通按钮">
+      <!-- button 标签写法的普通按钮。 -->
+      <button type="button">普通按钮</button>
+      <!-- button 标签写法的重置按钮，功能和上面的 input type="reset" 一样。 -->
+      <button type="reset">重置按钮</button>
+      <!-- button 标签写法的提交按钮，功能和上面的 input type="submit" 一样。 -->
+      <button type="submit">提交按钮</button>
+    </form>
+  </body>
+</html>
