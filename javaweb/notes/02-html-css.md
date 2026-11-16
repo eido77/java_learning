@@ -48,7 +48,8 @@ HTML5 是 HyperText Markup Language 5 的缩写，HTML5 技术结合了 HTML4.01
 - 单标签
 
 ```html
-<input type="text" name="username"/>
+<input type="text"
+       name="username"/>
 ```
 
 - 属性
@@ -259,3 +260,18 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 <img src="images/1681200503798.png" alt="1681200503798"  />
 
 示例代码：[特殊字符示例](../src/main/java/com/example/phase1/special-characters.html)
+
+# 三、CSS的使用
+
+> CSS  层叠样式表（英文全称：Cascading Style Sheets）能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力 ,简单来说,美化页面
+
+## 3.1 CSS 引入方式
+
+- 行内式：通过元素的 `style` 属性引入。
+- 内嵌式：在 HTML 的 `head` 中通过 `style` 标签定义。
+- 外部样式表：将 CSS 单独放入 `.css` 文件，通过 `link` 标签引入。
+
+示例代码：
+
+- [CSS 引入方式示例](../src/main/java/com/example/phase2/css-inclusion-methods.html)
+- [button.css](../src/main/java/com/example/phase2/css/button.css)

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 方式2：内嵌式 -->
+    <style>
+        /* 元素选择器，通过标签名确定样式的作用元素 */
+        input {
+            width: 60px;
+            height: 40px;
+            background-color: aquamarine;
+            color: black;
+            font-size: 20px;
+            border: 1px solid red;
+            border-radius: 5px;
+        }
+    </style>
+
+    <!-- 方式3：外部样式表 -->
+    <!--
+      rel（relationship）：说明当前文档与 href 所指资源的关系，link 标签必须有 rel 才有意义。
+        stylesheet：表示被链接的资源是样式表，浏览器会加载它并应用到当前页面。
+        icon：网站图标（favicon）
+        preload：提前高优先级加载资源，需配合 as，如 as="style"
+        prefetch：空闲时预取之后页面可能用到的资源
+        preconnect / dns-prefetch：提前建立连接 / 提前解析域名
+        alternate：同一内容的其他版本，如 RSS 订阅、多语言页面
+      多个值用空格分隔，如 rel="alternate stylesheet"。
+    -->
+    <link href="css/button.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--
+      CSS 引入方式
+      方式1：行内式，通过元素的 style 属性引入样式
+        写法：style="样式名:样式值; 样式名:样式值;"（每条声明以分号结尾）
+        优点：简单直接；优先级高于内嵌式和外部样式表（!important 除外），适合临时调试或单个元素的特殊样式
+        缺点：1. 代码复用度低，样式分散，不利于维护
+             2. 样式与结构交织，影响阅读，增大 HTML 文件体积
+             3. 无法被浏览器单独缓存，也不能写 :hover 等伪类和媒体查询
+      方式2：内嵌式，在 head 标签中通过 style 标签定义本页面的公共样式
+        写法：选择器 { 样式名:样式值; }，通过选择器确定样式的作用元素
+        优点：同一页面内可复用，适合小页面和演示
+        缺点：只对当前页面有效，多个页面无法共享
+      方式3：外部样式表，将 CSS 代码单独放入 .css 文件，需要的 html 在 head 中通过 link 标签引入
+        写法：link 标签写成 rel="stylesheet" 并用 href 指向 css 文件路径
+        优点：多页面共享，结构与样式分离，浏览器可缓存，实际项目首选
+        缺点：会多一次文件请求（通常影响很小）
+      补充：选择器权重相同时，后出现的样式覆盖先出现的
+    -->
+    <!-- 方式1：行内式 -->
+    <input type="button"
+           value="按钮"
+           style="width: 60px; height: 40px; background-color: aquamarine; color: black; font-size: 20px; border: 1px solid red; border-radius: 5px;">
+    <br>
+
+    <input type="button"
+           value="按钮2">
+  </body>
+</html>
