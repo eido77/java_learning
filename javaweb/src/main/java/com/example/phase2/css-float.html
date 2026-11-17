@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /*
+       width: 500px 不含边框，实际占 502px；innerDiv 同理实际为 102px。
+       想让设置的宽高就是最终大小，可写 box-sizing: border-box;。
+       固定 px 宽度在小屏幕上可能出现横向滚动，实际项目可用 max-width 或百分比。
+       */
+      .outerDiv {
+        width: 500px;
+        height: 300px;
+        border: 1px solid green;
+        background-color: beige;
+      }
+
+      /*
+       display 作用：指定元素的“显示类型”，决定元素怎么排列、占多大空间、宽高能不能生效。
+       display: block;（块级）：独占一行，默认撑满父元素宽度；width、height、margin、padding 都有效。div、p、h1 等默认就是 block。
+       display: inline;（行内）：不独占一行，在同一行内从左到右排列，大小由内容撑开；width、height 无效，上下 margin 也无效（左右 margin、padding 有效）。span、a、strong 等默认是 inline。
+      */
+      .innerDiv {
+        width: 100px;
+        height: 100px;
+        border: 1px solid blue;
+        /*
+         若启用，width、height 会失效；div 默认就是块级，不写 display 也是 block
+         三个 div 变成行内元素，100px 的宽高失效，只剩文字大小的框，在同一行排列，中间有空白间隙。
+         */
+        /*display: inline;*/
+      }
+
+      /*
+       float 作用：让元素“浮动”。元素脱离正常文档流（不再占位），沿指定方向移动，直到外边缘碰到包含框（这里是 outerDiv）的边缘或另一个浮动元素。
+       能放的值：left（靠左浮动）、right（靠右浮动）、none（不浮动，默认值）、inherit（继承父元素的 float 值）
+       float: left; ：d1 脱离文档流，向左贴到 outerDiv 的左边；后面没浮动的元素排版时当作 d1 不存在。
+       d1 浮动后不占位，d2 会上移到和 d1 相同的位置，两者大小一样，d1 的黄绿色背景把 d2 的红色背景盖住了。
+       d3 仍排在 d2 下面，向下偏移 102px（高度 100px 加上下边框共 2px）。
+      */
+      .d1 {
+        background-color: greenyellow;
+        float: left;
+      }
+
+      .d2 {
+        background-color: red;
+      }
+
+      .d3 {
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outerDiv">
+      <div class="innerDiv d1">diva</div>
+      <div class="innerDiv d2">divb</div>
+      <div class="innerDiv d3">divc</div>
+    </div>
+  </body>
+</html>
