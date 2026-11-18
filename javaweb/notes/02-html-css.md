@@ -311,3 +311,17 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 <img src="images/1681260937920.png" alt="1681260937920" style="zoom:80%;" />
 
 > 通过代码感受浮动的效果：[示例代码](../src/main/java/com/example/phase2/css-float.html)
+
+## 3.4 CSS定位
+
+`position` 属性用于指定元素的定位方式。
+
+常见取值：
+
+- `static`：静态定位（默认值）
+- `relative`：相对定位
+- `absolute`：绝对定位
+- `fixed`：固定定位
+- `sticky`：粘性定位
+
+示例代码：[定位示例](../src/main/java/com/example/phase2/css-positioning.html)
