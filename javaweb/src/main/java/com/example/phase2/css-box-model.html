@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /*
+       盒模型
+       大小计算（默认 content-box）：盒子宽 = width + 左右 padding + 左右 border；占位宽 = 盒子宽 + 左右 margin；高度同理
+       【外边距 / 内边距定义】
+       margin（外边距）：边框外侧的空白区域，用来拉开与相邻元素的距离，本身透明，不会被元素的背景色覆盖
+       padding（内边距）：内容与边框之间的空白区域，元素的背景色会铺满这块区域
+       【padding 变大时：是边线往外推，还是整块往外推？】
+       边框左上角的位置不动（由 margin 和前面的元素决定），padding 增大后边框向右、向下外移
+       也就是整个盒子变大，内容相对左上角被推开；盒子占的空间变大，后面的浮动元素也会被挤开
+      */
+      .outerDiv {
+        width: 500px;
+        height: 300px;
+        border: 1px solid green;
+        background-color: beige;
+        /*
+         auto = 由浏览器自动计算：块级元素有固定 width 时，把父元素剩余宽度平均分给左右外边距，于是水平居中
+         效果：.outerDiv 宽 500px，在 body 内水平居中显示，窗口变宽或变窄时始终居中
+
+         浮动元素上 auto 外边距按 0 处理，不会居中；行内元素（span 等）水平 margin: auto 也无效
+         只能水平居中：普通文档流里上下写 auto 等于 0，不会垂直居中
+         在 Flexbox / Grid 的子项上，auto 外边距会吸收剩余空间，水平垂直都可用，规则与普通文档流不同
+       */
+        margin: 0 auto;
+      }
+
+      .innerDiv {
+        width: 100px;
+        height: 100px;
+        border: 1px solid blue;
+        float: left;
+      }
+
+      .d1 {
+        background-color: greenyellow;
+        margin-right: 10px;
+        margin-top: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .d2 {
+        background-color: red;
+        margin-left: 10px;
+      }
+
+      .d3 {
+        background-color: aqua;
+        /*
+          【margin / padding 的简写规则】
+          写几个值　　含义（顺序：上 → 右 → 下 → 左，顺时针）
+          1 个：A　　　上 右 下 左 都是 A
+          2 个：A B　　上下 = A，左右 = B
+          3 个：A B C　上 = A，左右 = B，下 = C
+          4 个：A B C D　上 = A，右 = B，下 = C，左 = D
+          【padding 和 margin 不同点】
+          margin 可以是负值、可以是 auto；padding 不能是负值，也没有 auto
+          margin 在盒子外，透明，不带背景色；padding 在盒子内，会显示元素的背景色
+        */
+        margin: 10px 20px;
+        padding: 10px 20px 30px 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outerDiv">
+      <div class="innerDiv d1">diva</div>
+      <div class="innerDiv d2">divb</div>
+      <div class="innerDiv d3">divc</div>
+    </div>
+  </body>
+</html>

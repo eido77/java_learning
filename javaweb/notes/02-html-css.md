@@ -325,3 +325,19 @@ href="网址" 就是属性，href是属性名，"网址"是属性值
 - `sticky`：粘性定位
 
 示例代码：[定位示例](../src/main/java/com/example/phase2/css-positioning.html)
+
+## 3.5 CSS盒子模型
+
+> 所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用。
+
+- 由内到外：content（内容）→ padding（内边距）→ border（边框）→ margin（外边距）
+
++ 说明：
+    + Margin(外边距) - 清除边框外的区域，外边距是透明的。
+    + Border(边框) - 围绕在内边距和内容外的边框。
+    + Padding(内边距) - 清除内容周围的区域，内边距是透明的。
+    + Content(内容) - 盒子的内容，显示文本和图像。
+
+<img src="images/1681262585852.png" alt="1681262585852" style="zoom:67%;" />
+
+示例代码：[盒子模型](../src/main/java/com/example/phase2/css-box-model.html)
