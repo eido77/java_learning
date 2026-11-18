@@ -79,3 +79,14 @@
 + DOM编程其实就是用window对象的document属性的相关API完成对页面元素的控制的编程
 
 <img src="images/1681270260741.png" alt="1681270260741" style="zoom:67%;" />
+
+## 1.3 JS的引入方式
+
+> 内部脚本方式引入
+> 
+> 外部脚本方式引入
+
+**代码示例**
+
+- HTML 示例：[js-inclusion-methods.html](../src/main/java/com/example/phase3/js-inclusion-methods.html)
+- JavaScript 示例：[button.js](../src/main/java/com/example/phase3/js/button.js)

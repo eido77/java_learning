@@ -5,8 +5,73 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+      .btn1 {
+        width: 150px;
+        height: 40px;
+        font-size: 20px;
+        font-family: "隶书", serif;
+        background-color: yellow;
+        color: red;
+        border: 3px solid red;
+        border-radius: 5px;
+      }
+    </style>
+    <!--
+      JS 引入方式
+      【两种方式】
+        方式1  内嵌式：在 script 标签对中直接编写脚本代码
+        方式2  外部文件：<script src="js/button.js"></script>
+
+      【注意事项】
+        1. 一个 html 中可以有多个 script 标签，按出现顺序从上到下依次执行。
+        2. 带 src 的 script 标签内不能再写内嵌代码：标签内的内容会被浏览器忽略，不会执行。
+           两种方式都要用时，写成两个独立的 script 标签。
+        3. 引入外部文件时，标签对之间保持为空（不含空格、换行），避免误以为里面的代码会生效。
+        4. script 必须成对写出，不能自闭合写成 <script src="js/button.js" />，
+           否则浏览器会把后面的内容当作脚本内容吞掉。
+        5. 不要把同名函数同时放在内嵌和外部脚本中：后加载的会覆盖先加载的，排查困难。
+
+      【加载时机（脚本需要操作 DOM 时才重要）】
+        默认        遇到即暂停解析页面，下载并执行完再继续
+        defer      后台下载，页面解析完毕后按顺序执行（仅对带 src 的脚本有效，推荐）
+        async      后台下载，下载完立即执行，顺序不保证，适合互不依赖的脚本
+        body 末尾   传统做法：放在页面元素之后，效果与 defer 类似
+    -->
+    <!-- 方式1：内嵌式 -->
+    <!--
+    <script>
+       /*
+        【js 如何声明函数？】
+          语法：function 函数名(参数列表) { 函数体 }
+        */
+      function surprise() {
+        // 弹窗提示
+        /*
+         alert("提示内容")
+         弹出带“确定”按钮的模态框，关闭前页面脚本暂停（阻塞）
+         非字符串会被转成字符串显示
+         */
+        alert("惊喜");
+      }
+    </script>
+     -->
+
+    <!-- 方式2：引入外部脚本文件 -->
+    <!--
+      src 说明“代码在哪个文件”，type 说明“代码是什么类型”。
+      格式：type="主类型/子类型"（MIME 类型）。JS 的标准写法是 "text/javascript"
+      HTML5 中省略 type 时默认就是 JavaScript，官方也建议省略
+    -->
+    <script src="js/button.js"
+            type="text/javascript">
+    </script>
   </head>
   <body>
-
+    <!-- onclick 是“HTML 事件属性”：属性名是 on + 事件名，属性值是一段 JS 代码，事件触发时执行。 -->
+    <button class="btn1"
+            onclick="surprise()">点击
+    </button>
   </body>
 </html>
