@@ -83,10 +83,18 @@
 ## 1.3 JS的引入方式
 
 > 内部脚本方式引入
-> 
+>
 > 外部脚本方式引入
 
 **代码示例**
 
 - HTML 示例：[js-inclusion-methods.html](../src/main/java/com/example/phase3/js-inclusion-methods.html)
 - JavaScript 示例：[button.js](../src/main/java/com/example/phase3/js/button.js)
+
+# 二 JS的数据类型和运算符
+
+## 2.1 JS的数据类型
+
+## 2.2 JS的变量
+
+代码示例：[js-variables-and-data-types.html](../src/main/java/com/example/phase3/js-variables-and-data-types.html)

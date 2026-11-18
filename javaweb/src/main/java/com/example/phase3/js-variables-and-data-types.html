@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+        JS 数据类型
+        【核心概念】
+          弱类型：变量本身没有类型，“值”才有类型；同一个变量可先后存不同类型的值
+          原始类型：number / string / boolean / undefined / null（另有 Symbol、BigInt）
+          引用类型：Object（对象、数组、日期等）
+          typeof：运算符（不是函数），返回类型名字符串；typeof i 与 typeof(i) 等价
+          function类型：JS中的各种函数属于function数据类型
+
+        【类型与 typeof 结果】
+          number     10、3.14、NaN          → "number"（整数小数统一，无 int/double 之分）
+          string     "abc"、'abc'           → "string"
+          boolean    true、false            → "boolean"
+          undefined  声明了但未赋值           → "undefined"
+          null       主动赋值的“空值”         → "object"   ★ 历史遗留 bug，null 并非对象
+          function   函数                   → "function" ★ 函数本质是对象，typeof 单独区分
+          Object     new Object()、{}、[]   → "object"   ★ 数组也是 object，判断数组用 Array.isArray(arr)
+      */
+      var i = 10;
+      var str = "abc";
+
+      /*
+       console.log 类似 Java 的 System.out.println，
+       输出到浏览器开发者工具的 Console（F12），不会显示在页面上。
+       */
+      console.log(i); // 10
+      console.log(str); // abc
+      // typeof 返回的是字符串
+      console.log(typeof i); // number
+      console.log(typeof str); // string
+
+      i = 1 > 10;
+      // i 重新赋值后类型随之改变，体现弱类型
+      console.log(i); // false
+      console.log(typeof i); // boolean
+
+      i = new Object();
+      console.log(i); // {}（空对象，不同浏览器显示略有差异）
+      console.log(typeof i); // object
+
+      /*
+       fun   匿名函数表达式：变量 fun 被提升为 undefined，必须先赋值再调用，否则 TypeError
+       fun1  函数声明：整个函数被提升，在声明之前也能调用
+      */
+      var fun = function () {
+      };
+      function fun1() {
+      }
+      console.log(fun1); // ƒ fun1() {}
+      console.log(typeof fun1); // function
+
+      var y;
+      // 值 undefined 与类型字符串 "undefined" 同名，但是两回事
+      console.log(y); // undefined
+      console.log(typeof y); // undefined
+
+      var x = null;
+      console.log(x); // null
+      console.log(typeof x); // object
+
+      /*
+       js中使用var声明变量的特点
+       1 弱类型变量,可以统一声明成var
+       2 var声明的变量可以再次声明
+         重复声明时，第二个 var 实际只是赋值，不会重新创建变量；let/const 重复声明会 SyntaxError
+       3 变量可以使用不同的数据类型多次赋值
+       4 JS的语句可以以; 结尾,也可以不用;结尾
+         省略分号依赖“自动分号插入”，下一行以 ( [ ` 开头时可能出错，建议统一写分号
+       5 变量标识符严格区分大小写
+       6 标识符的命名规则参照JAVA
+       7 如果使用了 一个没有声明的变量,那么运行时会报uncaught ReferenceError: *** is not defined at index.html:行号:列号
+         运行到该语句时才报错；例外：typeof 未声明的变量不报错，返回 "undefined"
+       8 如果一个变量只声明,没赋值,那么值是undefined
+       9 var 有变量提升（声明提到作用域顶部，赋值留在原地），声明前读取得到 undefined；
+         var 只有函数作用域，没有块级作用域（if、for 的花括号不隔离变量）
+       */
+      var ii = 10;
+      var ss = "abc";
+      var ii = true; // 重复声明，不同类型赋值
+      console.log(ii); // true
+      // console.log(II); // 区分大小写
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
