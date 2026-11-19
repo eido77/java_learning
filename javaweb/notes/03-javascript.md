@@ -108,3 +108,7 @@
 ## 3.1 JS分支结构
 
 代码示例：[js-branching-structure.html](../src/main/java/com/example/phase3/js-branching-structure.html)
+
+## 3.2 JS循环结构
+
+代码示例：[js-loop-structures.html](../src/main/java/com/example/phase3/js-loop-structures.html)

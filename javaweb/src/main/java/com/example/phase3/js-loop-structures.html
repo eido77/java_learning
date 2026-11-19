@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       声明变量的关键字只有 var、let、const 三个。
+       默认用 const；变量需要重新赋值时才用 let；不用 var。
+         const：声明时必须初始化，之后不能重新赋值（数组、对象的内容仍可修改）
+         let：会变化的值，如循环计数器 for (let i = 0; ...)、累加变量
+       作用域区别：
+         var 是函数作用域：整个函数内可见，if / for / while 的 {} 不构成作用域。
+         let、const 是块级作用域：只在所在的 {} 内可见，出了 {} 就访问不到
+
+       变量提升：var 在声明前使用不报错，只得到 undefined；
+               let、const 在声明前访问会抛 ReferenceError（暂时性死区），错误更早暴露
+       循环中的回调：for (var ...) 的所有回调共用同一个变量，for (let ...) 每轮循环都是独立的新变量
+     */
+      // 【while 嵌套循环】
+      var i = 1;
+      while (i <= 9) {
+        var j = 1;
+        while (j <= i) {
+          // 一个 &nbsp; 就是一个空格（宽度约等于普通空格）
+          document.write(j + "*" + i + "=" + (j * i) + "&nbsp;");
+          j++;
+        }
+        /*
+         签名：document.write(...markup)，可传一个或多个字符串（按顺序拼接），无返回值（undefined）
+         向页面写入 HTML 文本
+         不推荐的原因：
+           页面加载完成后再调用，会隐式执行 document.open()，把整个页面清空重写
+           同步写入会阻塞页面解析；与 defer、async、type="module" 脚本搭配时不可靠
+           把 HTML 当字符串拼接，数据来自用户时有 XSS 风险
+         推荐：用 DOM API 操作已有容器（createElement + append / textContent）；
+           需要整段 HTML 时可用 insertAdjacentHTML（内容不可信时不要用）
+        */
+        document.write("<hr>");
+        i++;
+      }
+
+      document.write("<br>");
+
+
+      // 【for 嵌套循环】
+      for (var i = 1; i <= 9; i++) {
+        for (var j = 1; j <= i; j++) {
+          document.write(j + "*" + i + "=" + (j * i) + "&nbsp;");
+        }
+        document.write("<hr>");
+      }
+
+      document.write("<br>");
+
+
+      // 【普通 for 循环遍历数组】
+      var arr = ["北京", "上海", "广州"];
+      document.write("<ul>");
+      for (var index = 0; index < arr.length; index++) {
+        document.write("<li>" + arr[index] + "</li>");
+      }
+      document.write("</ul>");
+
+      // 【for...in 遍历数组】
+      // for (变量 in 对象)，变量依次取对象的“键”（属性名），不是元素的值，数组的键就是下标。
+      document.write("<ul>");
+      /*
+       JavaScript 用关键字区分遍历内容：in 遍历“键”，of（ES6）遍历“值”。
+       遍历数组的推荐写法：
+         for (const city of arr) { ... }                 要值
+         arr.forEach((city) => { ... })                  要值
+         for (const [i, city] of arr.entries()) { ... }  下标和值都要
+       for...in 更适合遍历对象的属性；用在数组上会连带遍历到数组上额外添加的属性和原型链上可枚举的属性，所以不推荐
+      */
+      for (var index in arr) {
+        document.write("<li>" + arr[index] + "</li>");
+      }
+      document.write("</ul>");
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
