@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       函数声明的语法
+         1.function 函数名(参数列表) {函数体}
+         2.var 函数名 = function(参数列表) {函数体}
+
+       和Java相比特点：
+         1.没有访问修饰符
+         2.没有返回值类型，也没有void，如果有值返回直接return即可
+         3.没有异常列表
+         4.调用方法时，实参和形参可以在数量上不一致，在方法内部可以通过 arguments获得调用时的实参
+         5.函数也可以作为参数传递给另一个方法
+
+        补充：
+          1.没有 return，或只写 return; 时，函数返回 undefined。
+          2.没有 throws 声明，但可以用 throw 抛出异常、用 try...catch 捕获。
+      */
+      // 声明函数1
+      // 圆括号里是“形参列表”，只写参数名，var、let、const 三个都不写。
+      function sum(a, b) {
+        return a + b;
+      }
+
+      // 声明函数2
+      // 函数表达式结尾的 } 后建议补分号
+      var sum1 = function (a, b) {
+        return a + b;
+      };
+
+      // 调用函数，接收结果
+      const result = sum(10, 20);
+      console.log(result); // 30
+
+      const result1 = sum1(10, 20);
+      console.log(result1); // 30
+
+      // 调用方法时，实参和形参可以在数量上不一致
+      function sum2(a, b) {
+        // arguments 是函数内置的类数组对象，装着调用时传入的全部实参 10, 20, 30, 40, 50，与形参个数无关。
+        console.log(arguments);
+        return a + b;
+      }
+
+      const result2 = sum2(10, 20, 30, 40, 50);
+      // 函数体只写了 return a + b，a 对应 10，b 对应 20；
+      // 多出的 30, 40, 50 没有形参接收，不参与计算（但仍保存在 arguments 中）。
+      console.log(result2); // 30
+
+
+      function sum3(a, b) {
+        return a + b;
+      }
+
+      const result3 = sum3(10);
+      // 只传了 10，形参 a = 10，b 没有收到值，自动为 undefined；
+      // 10 + undefined 时，undefined 会转成数字 NaN，所以结果是 NaN（Not a Number）。
+      console.log(result3); // NaN
+
+      // getSum 是 add 函数的“形参”，名字是自己起的占位变量，只在 add 内部有效
+      // 下面 add(sum) 调用时，把函数 sum 赋给了 getSum，所以此时 getSum 就是 sum。
+      function add(getSum) {
+        // getSum 不带括号 = 函数本身（值）；getSum(20, 30) = 调用函数，得到返回值。
+        // 如果传的不是函数（如 add(5)），运行到这一行才会报 TypeError。
+        return getSum(20, 30);
+      }
+
+      const result4 = add(sum);
+      console.log(result4); // 50
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

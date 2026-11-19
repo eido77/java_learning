@@ -112,3 +112,7 @@
 ## 3.2 JS循环结构
 
 代码示例：[js-loop-structures.html](../src/main/java/com/example/phase3/js-loop-structures.html)
+
+## 3.3 JS函数声明
+
+代码示例：[js-functions.html](../src/main/java/com/example/phase3/js-functions.html)
