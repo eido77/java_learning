@@ -102,3 +102,9 @@
 ## 2.3 JS的运算符
 
 代码示例：[js-operators.html](../src/main/java/com/example/phase3/js-operators.html)
+
+# 三 JS的流程控制和函数
+
+## 3.1 JS分支结构
+
+代码示例：[js-branching-structure.html](../src/main/java/com/example/phase3/js-branching-structure.html)

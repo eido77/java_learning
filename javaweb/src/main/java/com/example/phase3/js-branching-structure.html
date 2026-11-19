@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+        【if / else if / else】多分支，只执行第一个条件为真的分支，然后跳出整个结构
+          JS 格式：
+            if (条件1) {
+              语句1;
+            } else if (条件2) {
+              语句2;
+            } else {
+              语句3;
+            }
+          条件类型：Java 必须是 boolean；JS 可以是任意值，会自动转成真/假
+
+        【switch】等值匹配的多分支
+          switch (表达式) {
+            case 值1:
+              语句;
+              break;
+            default:
+              语句;
+          }
+      */
+      // 根据月份输出季节
+      /*
+        prompt 是浏览器提供的内置方法，不是 JS 语法本身，Node.js 中没有。
+        作用：弹出带输入框的模态对话框，用户点「确定」或「取消」之前，页面和后续代码都会被阻塞。
+        返回值：
+          · 点「确定」→ 输入的字符串（没输入则为 ""，输入数字也是字符串）
+          · 点「取消」→ null
+      */
+      var monthStr = prompt("请输入月份");
+      console.log(typeof monthStr); // string
+
+      // 字符串转换成整数
+      /*
+        Number.parseInt 是 ES2015 的内置方法，把字符串解析成整数。
+        签名：Number.parseInt(string, radix?) → number（解析失败返回 NaN）
+          · string：要解析的字符串（非字符串会先转成字符串，如 null 变成 "null"，结果为 NaN）
+          · radix：进制，取值 2~36
+        规则：忽略开头的空白，从左往右读，遇到第一个非法字符就停止；只取整数部分，小数直接舍去，不四舍五入。
+          Number.parseInt("12abc") → 12     Number.parseInt("3.9") → 3
+          Number.parseInt("abc")   → NaN    Number.parseInt("")    → NaN
+        对比：Number("12abc") 是严格转换，结果为 NaN；parseInt 是宽松解析。
+      */
+      var month = Number.parseInt(monthStr);
+      console.log(typeof month); // number
+
+      if (month == 1 || month == 2 || month == 12) {
+        console.log("冬天");
+      } else if (month >= 3 && month <= 5) {
+        console.log("春天");
+      } else if (month >= 6 && month <= 8) {
+        console.log("夏天");
+      } else if (month >= 9 && month <= 11) {
+        console.log("秋天");
+      } else {
+        console.log("输入错误");
+      }
+
+      /*
+        【条件判断中的「真假值」转换】
+        if 的条件不是 boolean 时，JS 会先自动转换成 boolean 再判断。
+
+        假值（falsy，共 6 类）：
+          false    0（含 -0、0n）    NaN    ""（空字符串）    null    undefined
+        真值（truthy）：除上面以外的一切，例如：
+          'false'    '0'    ' '（空格）    -1    []（空数组）    {}（空对象）    new Object()
+      */
+      if ('false') {
+        console.log(true); // true
+      } else {
+        console.log(false);
+      }
+
+      if (new Object()) {
+        console.log(true); // true
+      } else {
+        console.log(false);
+      }
+
+
+      var monthStr1 = prompt("请输入月份");
+      var month1 = Number.parseInt(monthStr1);
+
+      // switch 使用的是 严格相等（===）
+      switch (month1) {
+        case 3:
+        case 4:
+        case 5:
+          console.log("春");
+          break;
+        case 6:
+        case 7:
+        case 8:
+          console.log("夏");
+          break;
+        case 9:
+        case 10:
+        case 11:
+          console.log("秋");
+          break;
+        case 1:
+        case 2:
+        case 12:
+          console.log("冬");
+          break;
+        default :
+          console.log("月份有误");
+      }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
