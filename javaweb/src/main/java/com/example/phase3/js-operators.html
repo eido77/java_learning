@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       JS 运算符
+        ① 算术运算符            +  -  *  /  %  **
+        ② 自增自减 / 复合赋值    ++  --  +=  -=  *=  /=  %=
+        ③ 关系运算符            >  <  >=  <=  ==  ===  !=  !==
+        ④ 逻辑运算符            &&（与）  ||（或）  !（非）
+              短路求值：当左边的值已经能够决定整个表达式的结果时，就不再执行右边的表达式。
+              短路求值，且返回操作数本身：0 || 'a' → 'a'，1 && 2 → 2
+              A || B | A 为真值，返回 A；否则返回 B
+              A && B | A 为假值，返回 A；否则返回 B
+        ⑤ 条件（三元）运算符     条件表达式 ? 值1 : 值2
+        ⑥ 位运算符              &  |  ^  ~  <<  >>  >>>
+              先转成 32 位整数再运算；>> 保留符号位，>>> 高位补 0
+        ^	按位异或	两个二进制位不同时为 1
+        ~	按位取反	将二进制位全部取反
+        <<	左移	二进制位向左移动
+        >>	有符号右移	向右移动，高位补符号位
+        >>>	无符号右移	向右移动，高位补 0
+      */
+      console.log(10 / 2); // 5
+      // JS 的数字统一是双精度浮点数，没有 int 整数除法
+      console.log(10 / 4); // 2.5
+      // JS 的 number 遵循 IEEE 754 双精度浮点数标准，标准规定：
+      // 非 0 数 / 0 → Infinity（被除数为负则是 -Infinity），0 / 0 → NaN，任何数 % 0 → NaN
+      console.log(10 / 0); // Infinity
+      // NaN 不等于任何值（包括它自己），判断用 Number.isNaN(x)，不要写 x == NaN
+      console.log(10 % 0); // NaN（not a number）
+      console.log(0 % 0); // NaN
+      console.log(typeof NaN); // number
+
+      var i = 10;
+      console.log(i /= 0); // Infinity
+      // 实际计算的是 Infinity % 0，结果为 NaN。
+      console.log(i %= 0); // NaN
+
+      /*
+        ==   宽松相等：类型不同时，先做类型转换，再比较
+        ===  严格相等：不做类型转换；类型不同直接 false，类型相同再比较值
+
+        == 常见转换规则：
+           数字 vs 字符串：字符串转数字（'123' → 123；'abc' → NaN，比较结果为 false）
+           布尔值 vs 其他：布尔值先转数字（true → 1，false → 0）
+           null == undefined 为 true；它们和其他值（如 0）比较都是 false
+           NaN 与任何值都不相等，包括它自己
+           '' == 0 与 '0' == false 都是 true。
+      */
+      console.log(1 == 1); // true
+      // JS 中单引号和双引号完全等价，都表示字符串
+      console.log(1 == '1'); // true
+      console.log(1 == "1"); // true
+      console.log(1 == true); // true
+
+      console.log(1 === 1); // true
+      console.log(1 === '1'); // false
+      console.log(1 === true); // false
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

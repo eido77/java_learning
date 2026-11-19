@@ -98,3 +98,7 @@
 ## 2.2 JS的变量
 
 代码示例：[js-variables-and-data-types.html](../src/main/java/com/example/phase3/js-variables-and-data-types.html)
+
+## 2.3 JS的运算符
+
+代码示例：[js-operators.html](../src/main/java/com/example/phase3/js-operators.html)
