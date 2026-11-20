@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       创建对象的语法
+       方式1：new Object()
+       （对象字面量）方式2：{属性名:属性值, ... , 函数名:function() {}}
+       */
+      // 方式1：通过 new Object() 创建对象
+      // const 锁定的是变量 person 与对象之间的绑定（不能再 person = 另一个对象），不锁对象内容，所以后面仍可添加、修改属性。
+      // new Object() 创建的是「空对象」：没有自己的属性和方法（Object.keys(person) 为空数组）。
+      const person = new Object();
+      // 添加属性
+      // 同一个对象里，属性名（键）唯一：再次赋值同名属性会覆盖旧值。
+      // 值若是对象或数组，赋给多个属性后它们指向同一个对象（共享，改一处全变）。
+      person.name = '张三';
+      person.age = 10;
+
+      // 添加方法
+      // 给对象添加功能函数
+      person.eat = function (food) {
+        console.log(this.age + "岁的" + this.name + "吃" + food); // 10岁的张三吃火锅
+      };
+
+      // 访问属性
+      console.log(person.name); // 张三
+      console.log(person.age); // 10
+
+      // 调用方法
+      // 方法调用必须带括号和实参；只写 person.eat 得到的是函数本身，不会执行。
+      person.eat("火锅");
+
+
+      // 方式2：对象字面量（推荐）
+      const person1 = {
+        name1: "李四",
+        age1: 14,
+        eat1: function (food1) {
+          console.log(this.age1 + "岁的" + this.name1 + "吃" + food1); // 14岁的李四吃烤鸭
+        }
+      }
+
+      // 访问属性
+      console.log(person1.name1); // 李四
+      console.log(person1.age1); // 14
+
+      // 调用方法
+      person1.eat1("烤鸭");
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

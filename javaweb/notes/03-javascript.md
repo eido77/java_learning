@@ -116,3 +116,9 @@
 ## 3.3 JS函数声明
 
 代码示例：[js-functions.html](../src/main/java/com/example/phase3/js-functions.html)
+
+# 四 JS的对象和JSON
+
+## 4.1 JS声明对象的语法
+
+代码示例：[js-object-creation.html](../src/main/java/com/example/phase3/js-object-creation.html)
