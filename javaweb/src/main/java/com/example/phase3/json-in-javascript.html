@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       JSON格式的语法
+       var personStr = '{"属性名":"属性值", "属性名":"属性值", "属性名":{}, "属性名":[], "属性名":[{}, {}]}';
+       对象  {...}  可以嵌套
+       数组  [...]  可以嵌套
+
+       属性名 必须用双引号""包裹上
+       属性值 字符串必须用双引号""包上，数字可以不包上
+       JSON 只是纯数据格式，只有“属性名: 属性值”，没有方法，值也不能是函数。
+
+        【整体流程：字符串 ⇄ 对象】
+          JSON 串  ──JSON.parse()   ───▶  JS 对象
+          JS 对象  ──JSON.stringify()──▶  JSON 串
+          parse 是“解析”，stringify 是“字符串化”
+
+        JSON 串：本质是 string，只是内容符合 JSON 格式
+        JS 对象：parse 之后得到，用 . 或 [] 取值，还可以带方法
+        对象字面量：直接写在代码里的 { name: "张三" }，是 JS 语法而不是 JSON
+      */
+      // JSON格式的字符串
+      const personStr = '{"name":"张三", "age":10, "dog":{"dname":"小花"}, "loveSingers":["张三1","李四","王五"], "friends":[{"fname": "赵四儿"}, {"fname": "王田"}, {"fname": "王梦"}]}';
+
+      console.log(personStr);
+      console.log(typeof personStr); // string
+      console.log(personStr.name); // undefined
+
+      // 通过JSON.parse() 可以将一个JSON串转换为一个对象
+      // 把 JSON 格式的字符串解析成 JS 里的值，之后才能用 . 或 [] 读取属性
+      /*
+       签名：JSON.parse(text, reviver) // reviver 可选
+       text：必需，JSON 格式的字符串。
+       reviver：可选，转换解析结果的函数。
+       返回解析后的 JavaScript 值，具体类型取决于 JSON 字符串的内容。
+     */
+      const person = JSON.parse(personStr);
+
+      console.log(personStr);
+      console.log(person);
+      console.log(typeof person); // object
+      console.log(person.name); // 张三
+      console.log(person.dog.dname); // 小花
+      console.log(person.loveSingers[0]); // 张三1
+
+      // 通过JSON.stringify() 将一个对象转换为JSON串
+      // 把 JS 里的值（常用的是对象、数组）转换成 JSON 格式的字符串，方便保存和传输
+      /*
+       签名：JSON.stringify(value, replacer, space) // 后两个参数可选
+       参数
+         value：要转换的值（本例是 person 对象）
+         replacer：可选。可以是函数 (key, value)，用来修改或过滤每个属性（返回 undefined 则丢弃该属性）；
+           也可以是数组，只保留名单里的属性名，如 JSON.stringify(person, ["name", "age"])
+         space：可选。美化输出的缩进，数字（最多 10 个空格）或字符串，如 JSON.stringify(person, null, 2)
+       返回值：JSON 字符串，类型是 string
+
+       属性值为函数、undefined、Symbol 的属性会被忽略（在数组中则变成 null）
+       NaN、Infinity 会变成 null；Date 会变成 ISO 格式的字符串
+       顶层值是 undefined、函数或 Symbol 时，返回的是 undefined 而不是字符串
+      */
+      const personStr2 = JSON.stringify(person);
+      console.log(personStr2);
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

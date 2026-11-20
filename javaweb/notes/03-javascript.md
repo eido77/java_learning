@@ -122,3 +122,23 @@
 ## 4.1 JS声明对象的语法
 
 代码示例：[js-object-creation.html](../src/main/java/com/example/phase3/js-object-creation.html)
+
+## 4.2 JSON格式
+
+> JSON（JavaScript Object Notation, JS对象简谱）是一种轻量级的数据交换格式。它基于ECMAScript（European Computer Manufacturers Association）, 欧洲计算机协会的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率
+>
+> 简单来说,JSON 就是一种字符串格式,这种格式无论是在前端还是在后端,都可以很容易的转换成对象,所以常用于前后端数据传递</font>
+
++ 说明
+
+    + JSON字符串一般用于传递数据
+
+    + 通过JSON.parse()方法可以将一个JSON串转换成对象
+
+    + 通过JSON.stringify()方法可以将一个对象转换成一个JSON格式的字符串
+
++ 前后端传递数据
+
+![1681292306466](images/1681292306466.png)
+
+代码示例：[json-in-javascript.html](../src/main/java/com/example/phase3/json-in-javascript.html)
