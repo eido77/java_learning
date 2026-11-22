@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      // 数组的创建
+      // const 只禁止给变量 arr 重新赋值（arr = [] 会报错），数组内容和 length 仍可修改。
+      const arr = new Array();
+      console.log(arr); // []
+      console.log(arr.length); // 0
+
+      // 向数组中添加数据
+      arr[0] = '张三';
+      arr[1] = 10;
+      /*
+       给 arr[9] 赋值时，JS 自动把 length 更新为"最大下标 + 1"。
+       中间没赋值的下标 2~8 不是 undefined，而是"空位"（稀疏数组）。
+       此时 2 in arr 为 false，但读取 arr[2] 得到 undefined。
+       forEach / map 会跳过空位，for 循环和 for...of 却会读到 undefined。
+      */
+      arr[9] = true;
+      console.log(arr); // (10) ['张三', 10, 空属性 × 7, true]
+      console.log(arr.length); // 10
+      // length 必须是 0 ~ 2^32-1 的整数，否则抛 RangeError，如 -1、1.5、NaN。
+      arr.length = 20;
+      console.log(arr.length); // 20
+
+      const arr2 = new Array(5);
+      console.log(arr2); // (5) [空属性 × 5]
+      console.log(arr2.length); // 5
+
+      const arr3 = new Array('李四', 11, false);
+      // 数组字面量（简写，推荐）
+      // const arr3 = ['李四',11,false];
+      console.log(arr3); // (3) ['李四', 11, false]
+      console.log(arr3.length); // 3
+
+      // 数组字面量
+      const fruits = ['apple', 'orange', 'banana'];
+      const fruits2 = ['荔枝', '桃子', '榴莲'];
+      /*
+       签名：array.concat(value1, value2, ..., valueN)，参数个数不限，可以是数组，也可以是单个值。
+       作用：把调用者和所有参数按顺序拼成一个新数组并返回，常用于合并数组。
+       调用者在前，参数在后。
+       参数是数组时会被展开一层再加入；不是数组就直接作为一个元素加入；不带参数 = 浅拷贝。
+
+       参数写自己也可以。fruits.concat(fruits) 得到
+       ['apple', 'orange', 'banana', 'apple', 'orange', 'banana']，不报错，也不修改 fruits。
+      */
+      const fruitsAll = fruits.concat(fruits2);
+      console.log(fruits); // (3) ['apple', 'orange', 'banana']
+      console.log(fruits2); // (3) ['荔枝', '桃子', '榴莲']
+      console.log(fruitsAll); // (6) ['apple', 'orange', 'banana', '荔枝', '桃子', '榴莲']
+
+      // 移除并返回最后一个元素
+      /*
+       签名 array.pop()，没有参数。
+       作用：删除数组的最后一个元素并把它返回，数组长度减 1，原数组被修改。
+       对空数组调用 pop() 返回 undefined。
+       */
+      const res = fruitsAll.pop();
+      console.log(res); // 榴莲
+      console.log(fruitsAll); // (5) ['apple', 'orange', 'banana', '荔枝', '桃子']
+
+      // 从尾端增加元素并返回长度
+      /*
+       签名 array.push(element1, element2, ..., elementN)，可一次追加多个元素。
+       作用：把元素按顺序追加到数组末尾，返回追加后的新长度（不是新数组），原数组被修改。
+       push 的数组参数不会自动展开，push([1, 2]) 会将整个数组作为一个元素追加。
+       想逐个追加另一个数组中的元素，可使用展开运算符 ...，写成 push(...数组)。
+       例如 push(...[1, 2])，相当于 push(1, 2)。
+       */
+      const len = fruitsAll.push('葡萄');
+      console.log(len); // 6
+      console.log(fruitsAll); // (6) ['apple', 'orange', 'banana', '荔枝', '桃子', '葡萄']
+
+      // 查找荔枝
+      fruitsAll.push('荔枝');
+      console.log(fruitsAll); // (7) ['apple', 'orange', 'banana', '荔枝', '桃子', '葡萄', '荔枝']
+      /*
+       签名：
+         array.indexOf(searchElement, fromIndex)      fromIndex 可省略，默认 0（从头开始）
+         array.lastIndexOf(searchElement, fromIndex)  fromIndex 可省略，默认 array.length - 1（从尾开始）
+       作用：在数组中查找元素，返回下标；找不到返回 -1。
+       indexOf 从前往后找，返回第一个匹配项的下标；lastIndexOf 从后往前找，返回倒着找到的第一个匹配项的下标。
+       */
+      const index1 = fruitsAll.indexOf('荔枝');
+      const index2 = fruitsAll.lastIndexOf('荔枝');
+      console.log(index1); // 3
+      console.log(index2); // 6
+
+      // 反转
+      /*
+        签名 array.reverse()，没有参数。
+        作用：把数组元素的顺序就地颠倒，原数组被修改。
+        array.reverse() 会修改原数组，同时返回修改后的原数组（同一个数组引用），不是新数组。
+      */
+      fruitsAll.reverse();
+      console.log(fruitsAll); // (7) ['荔枝', '葡萄', '桃子', '荔枝', 'banana', 'orange', 'apple']
+
+      // 转换为字符串
+      /*
+        签名 array.join(separator)，separator 可省略，省略时默认是逗号 ','。
+        作用：把所有元素转成字符串，用 separator 连接成一个字符串并返回。不改变原数组。
+        空位、null、undefined 元素会变成空字符串。
+      */
+      console.log(fruitsAll.join("-")); // 荔枝-葡萄-桃子-荔枝-banana-orange-apple
+
+      // 截取数据
+      /*
+       签名 array.slice(start, end)，两个参数都可省略。
+       作用：从数组中截取一段，返回新数组（浅拷贝），原数组不变。
+       start = 起始下标（包含）；end = 结束下标（不包含）。
+       end 超过长度时只取到末尾，不报错。
+       负数下标从数组末尾倒数，-1 表示最后一个元素。
+       */
+      console.log(fruitsAll.slice(2, 5)); // (3) ['桃子', '荔枝', 'banana']
+
+      // 删除或者增加数据
+      console.log(fruitsAll); // (7) ['荔枝', '葡萄', '桃子', '荔枝', 'banana', 'orange', 'apple']
+      /*
+       签名 array.splice(start, deleteCount, item1, item2, ..., itemN)，只有 start 是必填。
+       作用：从下标 start 开始，先删除 deleteCount 个元素，再从下标 start 的位置插入 item1 ~ itemN（即插入到原下标 start 的元素之前）。
+       直接修改原数组，返回由"被删除元素"组成的数组（没有删除则返回 []）。
+       */
+      // 插入，从下标 2 开始删除 0 个，再插入 'el1'、'el2'
+      fruitsAll.splice(2, 0, 'el1', 'el2');
+      console.log(fruitsAll); // (9) ['荔枝', '葡萄', 'el1', 'el2', '桃子', '荔枝', 'banana', 'orange', 'apple']
+      // 删除，从下标 2 开始删除 2 个（刚好删掉上面插入的两个）
+      fruitsAll.splice(2, 2);
+      console.log(fruitsAll); // (7) ['荔枝', '葡萄', '桃子', '荔枝', 'banana', 'orange', 'apple']
+      // 替换，删除下标 2、3 的两个元素，并在原位置插入 'el1'、'el2'
+      fruitsAll.splice(2, 2, 'el1', 'el2');
+      console.log(fruitsAll); // (7) ['荔枝', '葡萄', 'el1', 'el2', 'banana', 'orange', 'apple']
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
