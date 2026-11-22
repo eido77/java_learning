@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      const date = new Date();
+      console.log(date);
+      console.log(date.getFullYear());
+      // getMonth() 返回 0-11，0 表示一月，11 表示十二月。
+      console.log(date.getMonth() + 1);
+      // getDate() 是几号，getDay() 是星期几（0 表示周日）。
+      // 如果 date 是无效日期（Invalid Date），返回 NaN。
+      console.log(date.getDate());
+      console.log(date.getHours());
+      console.log(date.getMinutes());
+      console.log(date.getSeconds());
+
+      /*
+       date 初始是“当前时间”，如果运行当天是 29、30、31 日，先 setMonth(1) 会因为二月
+       没有这一天而溢出到三月，之后 setDate(5) 得到的是三月 5 日，而不是二月 5 日。
+       setFullYear(2022) 也有类似情况：闰年的 2 月 29 日改成 2022 年会变成 3 月 1 日。
+       推荐写法（一次设置多个值，避免中间状态溢出）：
+         date.setFullYear(2022, 1, 5);
+         date.setHours(3, 4, 6);
+      */
+      // 按本地时区修改；对应的 UTC 版本是 setUTCFullYear() 等。
+      date.setFullYear(2022);
+      date.setMonth(1);
+      date.setDate(5);
+      date.setHours(3);
+      date.setMinutes(4);
+      date.setSeconds(6);
+
+      // 不发生溢出时，下面依次输出修改后的时间，以及 2022、2（1 + 1）、5、3、4、6
+      console.log(date);
+      console.log(date.getFullYear());
+      console.log(date.getMonth() + 1);
+      console.log(date.getDate());
+      console.log(date.getHours());
+      console.log(date.getMinutes());
+      console.log(date.getSeconds());
+
+      const str = '10';
+      const res = 10 + str;
+      console.log(res); // 1010
+      /*
+       签名：Number.parseInt(string, radix)，返回整数或 NaN。
+         string：要转换的内容，不能省略（省略得 NaN），不是字符串时会先转成字符串。
+         radix（可省略）：进制，取值 2-36，表示按几进制解析。
+       作用：把字符串从左到右解析成整数，会忽略开头的空白，遇到第一个无法识别的字符就停止：
+         Number.parseInt('42px', 10) 得 42
+         Number.parseInt('abc', 10) 得 NaN
+         Number.parseInt('3.9', 10) 得 3（直接截断，不四舍五入）
+     */
+      const res2 = 10 + Number.parseInt(str);
+      console.log(res2); // 20
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
