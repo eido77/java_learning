@@ -386,3 +386,7 @@
 | [onsubmit](https://www.runoob.com/jsref/event-onsubmit.html)     | 表单提交时触发                                                      |
 
 代码示例：[js-events-demo.html](../src/main/java/com/example/phase3/js-events-demo.html)
+
+## 5.3 事件的绑定
+
+代码示例：[dom-event-handling.html](../src/main/java/com/example/phase3/dom-event-handling.html)

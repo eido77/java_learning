@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+      1.事件的绑定方式
+        1)通过元素的属性绑定（onXxx）
+        2)通过DOM编程动态绑定
+        注意事项：
+          1.一个事件可以同时绑定多个函数
+          2.一个元素可以同时绑定多个事件
+      2.常见的事件
+        1)鼠标事件 onclick ondblclick onmouseover onmousemove onmouseleave
+        2)键盘事件 onkeydown onkeyup
+        3)表单事件 onfocus onblur onchange
+        4)页面加载事件 onload 页面加载完毕事件
+      3.事件的触发
+        1)行为触发
+        2)DOM编程触发
+
+
+         ① 事件的三种绑定方式
+          ▸ HTML 属性         onclick="fn()"                 JS 写在标签里，结构与行为混在一起，不推荐
+          ▸ onXxx 赋值        btn.onclick = fn               同一事件只保留最后赋的那个函数
+          ▸ addEventListener  btn.addEventListener('click', fn)
+                              同一事件可绑多个函数，可用 removeEventListener 取消，实际项目推荐
+
+        ② 让脚本在元素存在之后再操作 DOM 的办法（元素还没解析出来时，获取到的是 null）
+          ▸ 外部 js 文件 + defer    HTML 解析完后按顺序执行，实际项目推荐
+          ▸ type="module"          自动延迟执行，内联脚本也有效
+          ▸ DOMContentLoaded       document.addEventListener('DOMContentLoaded', fn)
+                                   DOM 解析完就触发，不等图片，内联脚本推荐
+          ▸ window.onload          触发最晚；写法最简单（本文件在用）
+          ▸ script 放在 body 末尾   元素已存在，无需额外代码，老写法
+          ▸ body 的 onload 属性     等价于 window.onload，但 JS 写在标签里，不推荐
+      */
+    </script>
+
+    <!--
+      window.onload 是事件属性。
+      页面及其依赖的资源（图片、样式表等）全部加载完成时，浏览器会调用赋给它的函数。
+    -->
+    <script>
+      window.onload = function () {
+        // 为div1绑定单击事件
+        /*
+         签名：document.getElementById(elementId)
+         参数 elementId，字符串类型。返回值 HTMLElement 或 null。
+         作用：根据 id 获取页面上的某个元素，得到的元素对象可用来改属性、改样式、绑定事件。
+         */
+        const div1 = document.getElementById('d1');
+        div1.onclick = function () {
+          // 处理函数要复用给多个元素，或元素变量名可能改变时，用 this（或 event.currentTarget）更稳妥，不依赖外层变量名。
+          // this.style.backgroundColor = 'red';
+          /*
+           style 是元素对象的属性，返回一个对象，用来读写元素的“行内样式”（即标签上的 style 属性）。
+           等价于给元素加上行内样式 style="background-color: red;"；
+           行内样式优先级高于 .div1 中的 background-color，所以点击后黄色变红色。
+           */
+          div1.style.backgroundColor = 'red';
+        };
+
+        // 通过DOM编程获得要操作的元素
+        const btn = document.getElementById('btn1');
+        // 绑定一个单击事件
+        btn.onclick = function () {
+          alert("按钮单击");
+
+          // 通过DOM编程触发div的单击事件
+          div1.onclick();
+        };
+      };
+    </script>
+
+    <style>
+      .div1 {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1"
+         id="d1">
+    </div>
+
+    <button id="btn1">按钮</button>
+
+    <a href="bom-common-apis.html">bom-common-apis.html</a>
+  </body>
+</html>
