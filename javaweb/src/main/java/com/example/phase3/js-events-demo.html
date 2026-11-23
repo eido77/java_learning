@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       1.事件的绑定方式
+         1)通过元素的属性绑定（onXxx）
+         2)通过DOM编程动态绑定
+         注意事项：
+           1.一个事件可以同时绑定多个函数
+           2.一个元素可以同时绑定多个事件
+       2.常见的事件
+         1)鼠标事件 onclick ondblclick onmouseover onmousemove onmouseleave
+         2)键盘事件 onkeydown onkeyup
+         3)表单事件 onfocus onblur onchange
+         4)页面加载事件 onload
+       3.事件的触发
+         1)行为触发
+         2)DOM编程触发
+       */
+      function fun1() {
+        console.log('1');
+      }
+
+      function fun2() {
+        console.log('2');
+      }
+
+      function fun3() {
+        console.log('3');
+      }
+
+      function fun4() {
+        console.log('鼠标悬停');
+      }
+
+      function fun5() {
+        console.log('鼠标移动');
+      }
+
+      function fun6() {
+        console.log('鼠标离开');
+      }
+
+      function fun7() {
+        console.log('按键按下');
+      }
+
+      function fun8() {
+        console.log('按键抬起');
+      }
+
+      function testFocus() {
+        console.log('获得焦点');
+      }
+
+      function testBlur() {
+        console.log('失去焦点');
+      }
+
+      function testChange(value) {
+        console.log('内容改变为：' + value);
+      }
+
+      function testChange2(value) {
+        console.log('选项改变为：' + value);
+      }
+
+      function testSubmit() {
+        /*
+         弹窗的三种方式（都是 window 的方法，会阻塞页面，用户处理之前后面的代码不会执行）
+         message 只能是纯文本；浏览器可能屏蔽重复弹窗。
+         信息提示框 alert(message)            没有返回值（undefined），只有"确定"按钮
+         信息输入框 prompt(message, default)  返回输入的字符串；点"取消"返回 null
+         信息确认框 confirm(message)          返回布尔值：确定 true，取消 false
+        */
+        // alert("表单提交");
+        // 在这里我们有机会阻止表单的提交
+        /*
+         【按"alert 和 preventDefault 都未被注释"来解释】
+         event 是事件对象，记录这次事件的信息（类型、触发元素 event.target 等），并提供控制方法。
+         取消"浏览器默认行为"：对 submit 事件就是取消表单提交（不跳转、不刷新）；对 a 标签的 click 就是取消跳转。
+         只取消默认行为，不会中断当前函数后面的代码，也不阻止事件冒泡（冒泡要用 stopPropagation）。
+         【点注册仍弹出"表单提交"，点确定后又不跳转】
+         执行顺序：submit 事件触发 → 函数从上往下执行 → 先 alert（阻塞，点确定才继续）→ 再执行 preventDefault() → 函数结束 → 浏览器发现事件已被取消，才放弃提交。
+         所以 alert 一定会弹：preventDefault 阻止的是"默认行为（提交并跳转）"，不是函数里的代码。
+         函数里的代码（alert）全都执行了；没执行的只有默认行为（跳转到 js-inclusion-methods.html）。
+         */
+        // event.preventDefault(); // 阻止组件的默认行为
+
+        /*
+         签名 confirm(message) → boolean，是 window 的方法，window. 可省略。
+         弹出带"确定 / 取消"的确认框，代码在用户选择之前暂停（同步阻塞）。
+         返回值：点确定得到 true，点取消得到 false。
+        */
+        const flag = confirm("确定提交表单吗？");
+        if (!flag) {
+          // 用户点"取消"（flag 为 false）时调用 event.preventDefault()，取消本次表单提交。
+          // event.preventDefault();
+
+          // 用"返回值"告诉浏览器要不要继续提交：返回 false 取消提交，返回 true 继续提交。
+          // onsubmit="return testSubmit()" 的 return 不能省
+          return false;
+        }
+        return true;
+      }
+
+      // alert 会阻塞页面，弹窗期间字段还没被重置，点确定后才重置
+      function testReset() {
+        alert("表单重置");
+      }
+    </script>
+  </head>
+  <body>
+    <!-- 事件绑定方式①：属性绑定（onXxx） -->
+    <input type="button"
+           value="按钮"
+           onclick="fun1(); fun2()"
+           ondblclick="fun3()">
+    <hr>
+
+    <!--
+      onmouseover：鼠标指针从元素外"移入 / 碰到"元素时触发。
+      onmousemove：指针在元素范围内移动时触发（会持续触发）。
+      onmouseleave：指针从元素"移出 / 离开"元素时触发。
+
+      onmouseout：移出元素自身、或从元素移入它的子元素时都会触发；会冒泡。
+      onmouseleave：指针真正离开元素（含全部子元素）才触发；不冒泡。
+    -->
+    <img src="img/logo.png"
+         onmouseover="fun4()"
+         onmousemove="fun5()"
+         onmouseleave="fun6()">
+    <hr>
+
+    <!--
+      keydown：按键被按下时触发；长按时系统会按键盘重复率持续发送按下信号，会连续触发。
+      keyup：按键松开时触发；一次按键只会松开一次，只触发一次。
+    -->
+    <input type="text"
+           onkeydown="fun7()"
+           onkeyup="fun8()">
+    <hr>
+
+    <!--
+      onfocus：元素"获得焦点"时触发。焦点就是当前接收键盘输入的元素；点击文本框、按 Tab 切换到它、调用 input.focus()、autofocus 都会触发，不只是"点击"。
+      onblur：元素"失去焦点"时触发。点击别处、按 Tab 离开、调用 blur()、切换浏览器窗口或标签页通常也会触发。
+      onchange：内容"改变并确认"时触发。文本框是在失去焦点时（或按回车提交时）触发，且内容必须与获得焦点时不同；没改、或改了又改回原样，都不触发。逐字符的实时变化用 oninput。
+    -->
+    <form action="js-inclusion-methods.html"
+          method="get"
+          onsubmit="return testSubmit()"
+          onreset="testReset()">
+      用户昵称：<input type="text"
+                      name="realName"
+                      onfocus="testFocus()"
+                      onblur="testBlur()"
+                      onchange="testChange(this.value)">
+      <br>
+      登录账号：<input type="text"
+                      name="loginName">
+      <br>
+      选择籍贯：
+      <select onchange="testChange2(this.value)">
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">广州</option>
+      </select>
+      <input type="submit"
+             value="注册">
+      <input type="reset"
+             value="重置">
+    </form>
+  </body>
+</html>
