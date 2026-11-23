@@ -389,4 +389,6 @@
 
 ## 5.3 事件的绑定
 
+## 5.4 事件的触发
+
 代码示例：[dom-event-handling.html](../src/main/java/com/example/phase3/dom-event-handling.html)
