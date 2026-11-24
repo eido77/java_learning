@@ -488,3 +488,28 @@
 ## 6.5 通过BOM编程实现会话级和持久级数据存储
 
 代码示例：[bom-common-apis.html](../src/main/java/com/example/phase3/bom-common-apis.html)
+
+# 七 DOM编程
+
+## 7.1 什么是DOM编程
+
+> 简单来说:DOM(Document Object Model)编程就是使用document对象的API完成对网页HTML文档进行动态修改,以实现网页数据和样式动态变化效果的编程.
+
++ document对象代表整个html文档，可用来访问页面中的所有元素，是最复杂的一个dom对象，可以说是学习好dom编程的关键所在。
++ 根据HTML代码结构特点,document对象本身是一种树形结构的文档对象。
+
+<img src="images/1681269953136.png" alt="1681269953136" style="zoom:67%;" />
+
++ 上面的代码生成的树如下
+
+<img src="images/1681269970254.png" alt="1681269970254"  />
+
++ DOM编程其实就是用window对象的document属性的相关API完成对页面元素的控制的编程
+
+<img src="images/1681270260741.png" alt="1681270260741"  />
+
++ dom树中节点的类型
+    + node 节点,所有节点的父类型
+        + element 元素节点,node的子类型之一,代表一个完整标签
+        + attribute 属性节点,node的子类型之一,代表元素的属性
+        + text 文本节点,node的子类型之一,代表双标签中间的文本
