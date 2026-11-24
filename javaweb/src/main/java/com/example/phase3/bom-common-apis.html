@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       window（浏览器提供的全局对象，BOM 的顶层）
+           ├─ alert / prompt / confirm          三种弹窗
+           ├─ setTimeout                        定时任务
+           ├─ history                           访问历史
+           ├─ location                          地址栏
+           ├─ sessionStorage / localStorage     会话级 / 持久级存储
+           └─ console                           控制台
+         以上都可以省略 window. 直接使用
+
+       sessionStorage 与 localStorage 对比
+         生命周期：session 在当前标签页或窗口关闭时清除（刷新页面不清除）；
+                 local 一直保留，除非手动删除或用户清理浏览器数据。
+         共享范围：session 只在当前标签页内可见，每个标签页各自独立；
+                 local 在同源的所有标签页和窗口之间共享。
+         使用建议：不要存密码等敏感信息（页面脚本可读取）；容量有限（通常约 5MB）。
+     */
+      function fun1() {
+        alert('hello');
+      }
+
+      function fun2() {
+        /*
+         签名：prompt(message, defaultValue)
+         message 是弹窗里的提示文字；defaultValue是输入框的默认值，均为字符串类型，均可省略。
+         弹出输入框，返回用户输入的字符串；点击取消返回 null。
+         */
+        const res = prompt('输入名字');
+        console.log(res);
+      }
+
+      function fun3() {
+        // confirm 的返回值是布尔值：点“确定”返回 true，点“取消”返回 false
+        const res = confirm('确定删除');
+        console.log(res);
+      }
+
+      function fun4() {
+        /*
+         签名：setTimeout(handler, timeout, ...args)
+         handler 是定时器到期后执行的函数；timeout 是延迟时间，单位为ms；args 是传递给 handler 的参数，均可省略。
+         创建定时器，返回定时器 ID（数字）。
+         作用：设置一个定时器，等待指定毫秒后执行一次回调函数；设置后不会阻塞后面的代码（异步）。
+         */
+        window.setTimeout(function () {
+          console.log('hi');
+        }, 2000);
+      }
+
+      function funA() {
+        // 向后翻页（回到上一页）
+        /*
+         签名：history.back()
+         无需传入参数，返回值为 void（无返回值）。
+         返回浏览器历史记录中的上一页，效果相当于点击浏览器的后退按钮。
+         没有上一页（如新开标签页的第一页）时调用不会有任何效果，也不报错。
+         */
+        history.back();
+      }
+
+      function funB() {
+        // 向前翻页（到下一页）
+        /*
+         签名：history.forward()
+         无需传入参数，返回值为 void（无返回值）。
+         前进到浏览器历史记录中的下一页，效果相当于点击浏览器的前进按钮。
+         只有历史记录里存在下一页时才有效（例如先后退过一次），否则没有任何效果。
+         */
+        // history.forward();
+
+        // 向前翻1页
+        /*
+         签名：history.go(delta)
+         delta 是整数偏移量，可以省略；正数表示前进，负数表示后退，0 表示重新加载当前页面。
+         按指定偏移量移动浏览器历史记录，返回值为 void（无返回值）。
+         按相对当前页的位置跳转历史记录：1 前进一页，-1 后退一页，2 前进两页，0 刷新当前页，超出范围则无效果。
+         */
+        history.go(1);
+      }
+
+      function funC() {
+        // 修改地址栏中的url
+        /*
+         location 是浏览器的地址栏对象，href 是它的属性，保存完整的网址字符串。
+         读取 location.href 得到当前网址，给它赋值就会跳转。
+         */
+        location.href = 'https://github.com/';
+      }
+
+      function funD() {
+        // 向sessionStorage中存储数据
+        /*
+         签名：sessionStorage.setItem(key, value)
+         key 是存储项的键名（用来取值、删除），value 是存储的值，均为字符串类型。
+         将数据存入会话存储，返回值为 void（无返回值）。
+         作用：把一对“键值”存进浏览器的 sessionStorage（会话存储）；键已存在则覆盖旧值。
+         值只能是字符串，传其它类型会被自动转成字符串（对象会变成 "[object Object]"）
+         */
+        sessionStorage.setItem('keyA','valueA');
+
+        // 向localStorage中存储数据
+        localStorage.setItem('keyB','valueB');
+      }
+
+      function funE() {
+        /*
+         签名：sessionStorage.getItem(key)
+         key 是要读取的存储项的键名，类型为字符串。
+         获取指定键对应的值，返回字符串；如果不存在该键，则返回 null。
+         作用：按键名读取之前存入的值。
+         */
+        console.log(sessionStorage.getItem('keyA'));
+
+        console.log(localStorage.getItem('keyB'));
+      }
+
+      function funF() {
+        /*
+         签名：sessionStorage.removeItem(key)
+         key 是要删除的存储项的键名，类型为字符串。
+         删除指定键及其对应的数据，返回值为 void（无返回值）。
+         作用：按键名删除一条存储记录；键不存在时什么也不发生，不报错。
+         */
+        sessionStorage.removeItem('keyA');
+
+        localStorage.removeItem('keyB');
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="fun1()">信息提示框</button>
+    <button onclick="fun2()">信息输入框</button>
+    <button onclick="fun3()">信息确认框</button>
+    <button onclick="fun4()">两秒后向控制台打印hi</button>
+    <hr>
+    <a href='https://www.google.com/'>Google</a>
+    <button onclick="funA()">上一页</button>
+    <button onclick="funB()">下一页</button>
+    <hr>
+    <button onclick="funC()">Github</button>
+    <hr>
+    <button onclick="funD()">存储数据</button>
+    <button onclick="funE()">读取数据</button>
+    <button onclick="funF()">清空数据</button>
+  </body>
+</html>
