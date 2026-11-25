@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      /*
+       1.获得document dom树
+         window.document
+       2.从document中获取要操作的元素
+         1)直接获取
+           var el1 =document.getElementById("username")    // 根据元素的id值获取页面上唯一的一个元素
+           var els =document.getElementsByTagName("input") // 根据元素的标签名获取多个同名元素
+           var els =document.getElementsByName("aaa")      // 根据元素的name属性值获得多个元素
+           var els =document.getElementsByClassName("a")   // 根据元素的class属性值获得多个元素
+         2)间接获取
+           var cs=div01.children                        // 通过父元素获取全部的子元素
+           var firstChild =div01.firstElementChild      // 通过父元素获取第一个子元素
+           var lastChild = div01.lastElementChild       // 通过父元素获取最后一个子元素
+           var parent = pinput.parentElement            // 通过子元素获取父元素
+           var pElement = pinput.previousElementSibling // 获取前面的第一个元素
+           var nElement = pinput.nextElementSibling     // 获取后面的第一个元素
+       3.对元素进行操作
+         1)操作元素的属性  元素名.属性名=''
+         2)操作元素的样式  元素名.style.样式名=''
+         3)操作元素的文本  元素名.innerText（只识别文本）
+                         元素名.innerHTML（可以识别HTML代码）
+         4)增删元素
+           var element =document.createElement("元素名") // 创建元素
+           父元素.appendChild(子元素)                     // 在父元素中追加子元素
+           父元素.insertBefore(新元素,参照元素)            // 在某个元素前增加元素
+           父元素.replaceChild(新元素,被替换的元素)         // 用新的元素替换某个子元素
+           元素.remove()                                // 删除当前元素
+       */
+      function fun1() {
+        // 获得document，通过document获得元素
+        // 返回：单个 Element 元素对象；未找到时返回 null。
+        const el1 = document.getElementById('username');
+        console.log(el1); // <input type="text" className="a" id="username" name="aaa">
+      }
+
+      function fun2() {
+        // 返回：实时的 HTMLCollection（类数组）；没找到返回空集合（length 为 0），不是 null。
+        const els = document.getElementsByTagName('input');
+        // 打印整个 HTMLCollection 集合
+        console.log(els); // HTMLCollection(13) [...]
+        for (let i = 0; i < els.length; i++) {
+          // 逐个打印集合中的元素对象
+          // 等价：els.item(i)；区别是下标越界时 els[i] 得到 undefined，els.item(i) 得到 null。
+          console.log(els[i]);
+        }
+      }
+
+      function fun3() {
+        // 返回：实时的 NodeList（类数组）；没找到返回空集合（length 为 0），不是 null。
+        const els = document.getElementsByName('aaa');
+        // 直接打印整个集合对象
+        console.log(els); // NodeList(2) [input#username.a, input#password.b]
+        // 按下标遍历，逐个打印元素，只打印 2 个元素，结果最准确，也最通用。
+        // for (let i = 0; i < els.length; i++) {
+        // 除了元素索引，还可能遍历其他可枚举属性，导致输出非元素内容。
+        for (let i in els) {
+          console.log(els[i]);
+        }
+      }
+
+      function fun4() {
+        // 字符串里可以写多个类名，用空格隔开（如 'a b' 表示同时拥有 a 和 b 的元素）。
+        // 返回：实时的 HTMLCollection（类数组）；没找到返回空集合，不是 null。
+        const els = document.getElementsByClassName('a');
+        for (let i = 0; i < els.length; i++) {
+          console.log(els[i]);
+        }
+      }
+
+      function fun5() {
+        // 获取父元素
+        const div01 = document.getElementById('div01');
+
+        // 通过父元素获取所有子元素
+        // 返回它所有的“子元素”（只含标签，不含文本、注释节点），类型是实时的 HTMLCollection。
+        const cs = div01.children;
+        for (let i = 0; i < cs.length; i++) {
+          console.log(cs[i]);
+        }
+
+        // 通过父元素获取第一个子元素
+        // 返回第一个子元素（只算标签），没有子元素则为 null。
+        console.log(div01.firstElementChild);
+        // 通过父元素获取最后一个子元素
+        // 返回最后一个子元素（只算标签），没有子元素则为 null。
+        console.log(div01.lastElementChild);
+      }
+
+      function fun6() {
+        // 获取子元素
+        const pinput = document.getElementById('password');
+
+        // 通过子元素获取父元素
+        // 返回父元素（只算标签）；没有父元素时为 null。
+        console.log(pinput.parentElement);
+      }
+
+      function fun7() {
+        // 获取子元素
+        const pinput = document.getElementById('password');
+
+        // 获取前面的第一个元素
+        // 返回紧挨在它前面的那一个兄弟元素（只算标签），没有则为 null。
+        console.log(pinput.previousElementSibling);
+        // 获取后面的第一个元素
+        // 返回紧挨在它后面的那一个兄弟元素（只算标签），没有则为 null。
+        console.log(pinput.nextElementSibling);
+      }
+
+      function changeAttribute() {
+        const in1 = document.getElementById('in1');
+        // 获得属性值
+        console.log(in1.type);
+        console.log(in1.value);
+
+        // 修改属性值
+        /*
+         type、value 是 HTML 标签本身的属性（不是 CSS 样式），DOM 元素对象有同名属性，不需要 style。
+         格式：元素.属性名 = '值'（读取时用 元素.属性名）。
+         */
+        in1.type = 'button';
+        in1.value = 'hi';
+      }
+
+      function changeStyle() {
+        const in1 = document.getElementById('in1');
+        /*
+         格式：元素.style.驼峰样式名 = '值'，border-radius 要写成 borderRadius，值是字符串并带单位（如 '5px'）。
+         这里设置的是行内样式，优先级高于 CSS 里的 #in1 { color: red }，所以文字会变成绿色。
+         */
+        in1.style.color = 'green';
+        in1.style.borderRadius = '5px';
+      }
+
+      function changeText() {
+        const div02 = document.getElementById('div02');
+        /*
+         读取或设置元素“可见的文本内容”，只当作纯文本处理，不解析 HTML。
+         读取时返回页面上实际显示的文字（受 CSS 影响，被隐藏的文字不会返回），首尾的换行和空格不会带上。
+         */
+        console.log(div02.innerText);
+        // 当作纯文本，标签符号原样显示，页面上看到的是 <h1>嗨</h1> 这串字符。
+        // div02.innerText = '<h1>嗨</h1>';
+        // 当作 HTML 解析，页面上生成一个真正的 h1 标题元素，显示大号的“嗨”。
+        div02.innerHTML = '<h1>嗨</h1>';
+      }
+
+      function addCs() {
+        // 创建一个新的元素
+        /*
+         签名：Element createElement(String tagName)
+         参数：tagName，标签名称，字符串类型。
+         返回：新创建的 HTML 元素对象。
+         作用：根据标签名创建一个新的元素对象，它只存在于内存中，还不在页面上，放入父元素后才会显示。
+         */
+        const csli = document.createElement('li'); // <li></li>
+        // 设置子元素的属性和文本 // <li id="cs">长沙</li>
+        csli.id = 'cs';
+        csli.innerText = '长沙';
+        // 将子元素放入父元素中
+        const cityul = document.getElementById('city');
+        // 在父元素中追加子元素
+        /*
+         签名：Node appendChild(Node child)
+         参数：child，要添加的子节点，不能填字符串。
+         返回：添加后的子节点（Node 对象）。
+         作用：把一个节点追加到父元素子节点列表的最后。
+         */
+        cityul.appendChild(csli);
+      }
+
+      function addCsBeforeSz() {
+        // 创建一个新的元素
+        const csli = document.createElement('li'); // <li></li>
+        // 设置子元素的属性和文本 <li id="cs">长沙</li>
+        csli.id = 'cs';
+        csli.innerText = '长沙';
+        // 将子元素放入父元素中
+        const cityul = document.getElementById('city');
+        // 在父元素中追加子元素，在深圳前面插入
+        // cityul.insertBefore(新元素,参照元素)
+        const szli = document.getElementById('sz');
+        /*
+         签名：Node insertBefore(Node newNode, Node referenceNode)，由父元素调用。
+         参数：newNode是要插入的新节点，referenceNode是参照节点，参照节点必须是该父元素的子节点。
+         作用：把新节点插入到参照节点的前面。
+         返回：返回被插入的新节点。
+         注意：第 2 个参数传 null 时，效果等同 appendChild（插到最后）。
+         */
+        cityul.insertBefore(csli, szli);
+      }
+
+      function replaceSz() {
+        // 创建一个新的元素
+        const csli = document.createElement('li'); // <li></li>
+        // 设置子元素的属性和文本 <li id="cs">长沙</li>
+        csli.id = 'cs';
+        csli.innerText = '长沙';
+        // 将子元素放入父元素中
+        const cityul = document.getElementById('city');
+        // 在父元素中追加子元素，用新元素替换旧元素
+        const szli = document.getElementById('sz');
+        /*
+         签名：Node replaceChild(Node newChild, Node oldChild)，由父元素调用。
+         参数：newChild是新节点，oldChild是被替换的旧节点。
+         作用：用新节点替换父元素下的某个子节点，被替换的节点会从页面移除。
+         返回：返回被替换掉的旧节点，它只是不在页面上了，对象仍然存在，必要时可以再放回去。
+         */
+        cityul.replaceChild(csli, szli);
+      }
+
+      function removeSz() {
+        const szli = document.getElementById('sz');
+        /*
+         签名：void remove()，由要删除的元素自己调用。
+         作用：把该元素从 DOM 树中移除，页面上随之消失；元素对象本身仍然存在于变量中，必要时可以再放回去。
+         */
+        szli.remove();
+
+        console.log(szli); // <li id="sz">深圳</li>
+      }
+
+      function clearCity() {
+        const cityul = document.getElementById('city');
+        // 返回第一个子节点（任何类型的节点都算，包括文本节点、注释节点），没有子节点时为 null。
+        let fc = cityul.firstChild;
+        while (fc != null) {
+          // 逐个删除子节点，ul 保留，之后还能继续添加城市。
+          /*
+           fc 保存的是“当前要删的节点”。fc.remove() 之后，这个节点虽然从页面移除了，但变量 fc 仍然指向它，不会自动变成 null。
+           所以必须重新赋值 fc = cityul.firstChild，让 fc 指向现在新的第一个子节点；等所有子节点删完，firstChild 变成 null，循环才会结束。
+           更简洁的等价写法：while (cityul.firstChild) { cityul.firstChild.remove(); }
+           */
+          fc.remove();
+          fc = cityul.firstChild;
+        }
+        // 清空 ul 里的全部内容（含空白文本节点），ul 本身保留，效果和上面的循环一样
+        // cityul.innerHTML = '';
+        // 删掉整个列表，把 ul 元素自己从页面删除，列表容器没了
+        // cityul.remove();
+      }
+    </script>
+    <style>
+      /*
+       #in1 是 id 选择器，优先级从高到低：行内 style > id 选择器 > 类选择器 > 标签选择器。
+       写法是 #id值 ，# 就代表 id，# 后面直接写 id 属性的值
+       */
+      #in1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div01">
+      <input type="text" class="a" id="username" name="aaa"/>
+      <input type="text" class="b" id="password" name="aaa"/>
+      <input type="text" class="a" id="email"/>
+      <input type="text" class="b" id="address"/>
+    </div>
+
+    <input type="text" class="a"/><br>
+    <input type="button" value="根据id获取指定元素" onclick="fun1()" id="btn01"/>
+    <input type="button" value="根据标签名获取多个元素" onclick="fun2()" id="btn02"/>
+    <input type="button" value="根据name属性值获取多个元素" onclick="fun3()" id="btn03"/>
+    <input type="button" value="根据class属性值获得多个元素" onclick="fun4()" id="btn04"/>
+    <hr>
+    <input type="button" value="通过父元素获取子元素" onclick="fun5()" id="btn05"/>
+    <input type="button" value="通过子元素获取父元素" onclick="fun6()" id="btn06"/>
+    <input type="button" value="通过当前元素获取兄弟元素" onclick="fun7()" id="btn07"/>
+    <hr>
+    <br>
+
+    <input id="in1" type="text" value="hello">
+    <hr>
+    <button onclick="changeAttribute()">操作属性</button>
+    <button onclick="changeStyle()">操作样式</button>
+    <button onclick="changeText()">操作文本</button>
+    <hr>
+    <div id="div02">
+      hello
+    </div>
+
+    <hr>
+    <br>
+    <ul id="city">
+      <li id="bj">北京</li>
+      <li id="sh">上海</li>
+      <li id="sz">深圳</li>
+      <li id="gz">广州</li>
+    </ul>
+    <hr>
+    <!-- 目标1：在城市列表的最后添加一个子标签  <li id="cs">长沙</li>  -->
+    <button onclick="addCs()">增加长沙</button>
+
+    <!-- 目标2：在城市列表的深圳前添加一个子标签  <li id="cs">长沙</li>  -->
+    <button onclick="addCsBeforeSz()">在深圳前插入长沙</button>
+
+    <!-- 目标3  将城市列表的深圳替换为  <li id="cs">长沙</li>  -->
+    <button onclick="replaceSz()">替换深圳</button>
+
+    <!-- 目标4  将城市列表删除深圳  -->
+    <button onclick="removeSz()">删除深圳</button>
+
+    <!-- 目标5  清空城市列表  -->
+    <button onclick="clearCity()">清空</button>
+  </body>
+</html>

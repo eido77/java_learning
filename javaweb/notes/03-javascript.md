@@ -513,3 +513,66 @@
         + element 元素节点,node的子类型之一,代表一个完整标签
         + attribute 属性节点,node的子类型之一,代表元素的属性
         + text 文本节点,node的子类型之一,代表双标签中间的文本
+
+## 7.2 获取页面元素的几种方式
+
+### 7.2.1 在整个文档范围内查找元素结点
+
+| 功能          | API                                   | 返回值      |
+|-------------|---------------------------------------|----------|
+| 根据id值查询     | document.getElementById(“id值”)        | 一个具体的元素节 |
+| 根据标签名查询     | document.getElementsByTagName(“标签名”)  | 元素节点数组   |
+| 根据name属性值查询 | document.getElementsByName(“name值”)   | 元素节点数组   |
+| 根据类名查询      | document.getElementsByClassName("类名") | 元素节点数组   |
+
+### 7.2.2 在具体元素节点范围内查找子节点
+
+| 功能        | API                       | 返回值     |
+|-----------|---------------------------|---------|
+| 查找子标签     | element.children          | 返回子标签数组 |
+| 查找第一个子标签  | element.firstElementChild | 标签对象    |
+| 查找最后一个子标签 | element.lastElementChild  | 节点对象    |
+
+### 7.2.3 查找指定子元素节点的父节点
+
+| 功能           | API                   | 返回值  |
+|--------------|-----------------------|------|
+| 查找指定元素节点的父标签 | element.parentElement | 标签对象 |
+
+### 7.2.4  查找指定元素节点的兄弟节点
+
+| 功能        | API                         | 返回值  |
+|-----------|-----------------------------|------|
+| 查找前一个兄弟标签 | node.previousElementSibling | 标签对象 |
+| 查找后一个兄弟标签 | node.nextElementSibling     | 标签对象 |
+
+## 7.3 操作元素属性值
+
+### 7.3.1 属性操作
+
+| 需求    | 操作方式           |
+|-------|----------------|
+| 读取属性值 | 元素对象.属性名       |
+| 修改属性值 | 元素对象.属性名=新的属性值 |
+
+### 7.3.2 内部文本操作
+
+| 需求             | 操作方式              |
+|----------------|-------------------|
+| 获取或者设置标签体的文本内容 | element.innerText |
+| 获取或者设置标签体的内容   | element.innerHTML |
+
+## 7.4 增删元素
+
+### 7.4.1 对页面的元素进行增删操作
+
+| API                                      | 功能                    |
+|------------------------------------------|-----------------------|
+| document.createElement(“标签名”)            | 创建元素节点并返回，但不会自动添加到文档中 |
+| document.createTextNode(“文本值”)           | 创建文本节点并返回，但不会自动添加到文档中 |
+| element.appendChild(ele)                 | 将ele添加到element所有子节点后面 |
+| parentEle.insertBefore(newEle,targetEle) | 将newEle插入到targetEle前面 |
+| parentEle.replaceChild(newEle, oldEle)   | 用新节点替换原有的旧子节点         |
+| element.remove()                         | 删除某个标签                |
+
+代码示例：[dom-api.html](../src/main/java/com/example/phase3/dom-api.html)
