@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .ht {
+        text-align: center;
+        color: cadetblue;
+        font-family: 幼圆;
+      }
+
+      .tab {
+        width: 500px;
+        border: 5px solid cadetblue;
+        margin: 0px auto;
+        border-radius: 5px;
+        font-family: 幼圆;
+      }
+
+      /* .ltr td 是后代选择器：选中 class 为 ltr 的元素内部的所有 td。 */
+      .ltr td {
+        border: 1px solid powderblue;
+      }
+
+      .ipt {
+        border: 0px;
+        width: 50%;
+      }
+
+      .btn1 {
+        border: 2px solid powderblue;
+        border-radius: 4px;
+        width: 60px;
+        background-color: antiquewhite;
+      }
+
+      /* 逗号是分组选择器：两个 id 选择器共用一套样式，id 选择器优先级高于类选择器。 */
+      #usernameMsg, #userPwdMsg {
+        color: rgb(230, 87, 51);
+      }
+
+      .buttonContainer {
+        text-align: center;
+      }
+    </style>
+    <script>
+      // 检验用户名格式是否合法的函数
+      function checkUsername() {
+        // 定义正则表示字符串的规则
+        const usernameReg = /^[a-zA-Z0-9]{5,10}$/;
+        // 获得用户在页面上输入的信息
+        const usernameInput = document.getElementById('usernameInput');
+        /*
+         value 不是 HTML 标签上的 value 属性，而是 DOM 对象（HTMLInputElement）的 value 属性，它实时保存用户当前输入框中的内容。
+         HTML 标签上的 value 属性只是初始默认值，不会随用户输入而改变，所以没设置 value 也可以读取输入内容。
+         */
+        const username = usernameInput.value;
+        // 获得格式提示的框
+        const usernameMsg = document.getElementById('usernameMsg');
+        // 格式有误时,返回false,在页面上提示
+        if (!usernameReg.test(username)) {
+          usernameMsg.innerText = '用户名格式有误';
+          // onblur="checkUsername()" 中，事件属性的内容就是处理函数的函数体，这里只是执行一次，返回值被浏览器丢弃；blur 没有可取消的默认行为，所以不需要 return。
+          // 只有 onsubmit 这类默认行为可以被取消的事件，才需要写 return 方法() 把结果交给浏览器。
+          return false;
+        }
+        // 格式OK,返回true 在页面上提示OK
+        usernameMsg.innerText = 'OK';
+        return true;
+      }
+
+      // 检验密码格式是否合法的函数
+      function checkUserPwd() {
+        // 定义正则表示字符串的规则
+        const userPwdReg = /^[0-9]{6}$/;
+        // 获得用户在页面上输入的信息
+        const userPwdInput = document.getElementById('userPwdInput');
+        const userPwd = userPwdInput.value;
+        // 获得格式提示的框
+        const userPwdMsg = document.getElementById('userPwdMsg');
+        // 格式有误时,返回false,在页面上提示
+        if (!userPwdReg.test(userPwd)) {
+          userPwdMsg.innerText = '密码必须是6位数字';
+          return false;
+        }
+        // 格式OK,返回true 在页面上提示OK
+        userPwdMsg.innerText = 'OK';
+        return true;
+      }
+
+      // 表单在提交时,校验用户名和密码格式,格式OK才会提交
+      /*
+       return 只写在“需要把结果交给浏览器”的地方。
+       onsubmit="return checkForm()"：事件属性的内容会被当作处理函数的函数体，写 return 才能把 true 或 false 交给浏览器。
+       */
+      // 前端校验只是提升体验，用户可以绕过页面直接请求接口，服务器端仍必须再次校验用户名和密码。
+      function checkForm() {
+        const flag1 = checkUsername();
+        const flag2 = checkUserPwd();
+
+        /*
+         写成 return checkUsername() && checkUserPwd(); 语法上可行，但 && 有短路特性：用户名校验返回 false 时，不会再执行 checkUserPwd()。
+         这样密码框的提示就不会更新，用户一次只能看到用户名的错误。
+         */
+        return flag1 && flag2;
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1 class="ht">欢迎使用日程管理系统</h1>
+    <h3 class="ht">请登录</h3>
+    <form method="post" action="/user/login" onsubmit="return checkForm()">
+      <table class="tab" cellspacing="0">
+        <tr class="ltr">
+          <td>请输入账号</td>
+          <td>
+            <input class="ipt" type="text" id="usernameInput" name="username" onblur="checkUsername()">
+            <span id="usernameMsg"></span>
+          </td>
+        </tr>
+        <tr class="ltr">
+          <td>请输入密码</td>
+          <td>
+            <input class="ipt" type="password" id="userPwdInput" name="userPwd" onblur="checkUserPwd()">
+            <span id="userPwdMsg"></span>
+          </td>
+        </tr>
+        <tr class="ltr">
+          <td colspan="2" class="buttonContainer">
+            <input class="btn1" type="submit" value="登录">
+            <!-- reset 只清空输入框，不会清除 span 中已显示的 OK 或错误提示 -->
+            <input class="btn1" type="reset" value="重置">
+            <a class="btn1" href="regist.html">去注册</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

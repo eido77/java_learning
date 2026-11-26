@@ -671,3 +671,11 @@
 | 电子邮箱 | /^\[a-zA-Z0-9 \_.-]+@(\[a-zA-Z0-9-]+\[.]{1})+\[a-zA-Z]+\$/ |
 
 代码示例：[js-regex-string-processing.html](../src/main/java/com/example/phase3/js-regex-string-processing.html)
+
+# 九 案例开发-日程管理-第一期
+
+## 9.1 登录页及校验
+
+![1690507542637](images/1690507542637.png)
+
+代码示例：[login.html](../src/main/java/com/example/schedulesystem/login.html)
