@@ -679,3 +679,9 @@
 ![1690507542637](images/1690507542637.png)
 
 代码示例：[login.html](../src/main/java/com/example/schedulesystem/login.html)
+
+## 9.2 注册页及校验
+
+![1690507600043](images/1690507600043.png)
+
+代码示例：[regist.html](../src/main/java/com/example/schedulesystem/regist.html)
