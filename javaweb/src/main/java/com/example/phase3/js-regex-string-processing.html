@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      // 验证
+      // 定义一个正则表达式
+      /*
+       定义正则表达式有两种方式，都是 ECMAScript 标准写法：
+         1) 字面量：/pattern/flags
+         2) 构造函数：new RegExp('pattern', 'flags')（也可以省略 new）
+       【完整格式】
+       pattern（模式）：要匹配的规则，字面量里写在两个斜杠之间
+       flags（修饰符，可选）：写在结束斜杠之后，每个字母一个功能，可以组合使用：
+         g 全局匹配（找出所有匹配项，而不是找到第一个就停）
+         i 忽略大小写
+         m 多行模式（^ 和 $ 按每一行的开头、结尾匹配）
+         s 让 . 也能匹配换行符
+         u 按 Unicode 处理（如 emoji、扩展汉字）
+         y 粘性匹配（必须从 lastIndex 位置开始匹配）
+         d 额外生成匹配位置信息；v 是 u 的增强版（d 和 v 较新，注意浏览器版本）
+       例：/o/ 没有修饰符；/o/gi 等价于 new RegExp('o', 'gi')
+       */
+      const reg = /o/;
+      // 自定义一个字符串
+      const str = 'hello world!';
+      // 校验是否符合正则的规则
+      /*
+       签名：RegExp.prototype.test(string)，返回 boolean。
+       参数：string 要检测的字符串；传入非字符串会被转成字符串（不传参数则检测字符串 "undefined"）。
+       作用：检测字符串里是否存在符合正则规则的内容。
+       没加 ^ $ 时，只要字符串「包含」符合规则的片段就返回 true，不要求整个字符串都符合；整串校验要加 ^ 和 $。
+       */
+      console.log(reg.test(str)); // true
+
+      // 匹配
+      const reg2 = /o/g;
+      const str2 = 'hello world!';
+      /*
+       match 的签名：String.prototype.match(regexp)。
+       参数：正则表达式对象；如果传字符串，会被当作 new RegExp(字符串) 使用；不传则相当于匹配空字符串，返回 ['']。
+       作用：在字符串中查找符合正则的内容并返回结果。
+       返回值（匹配成功返回数组，未匹配返回 null）分两种情况：
+         正则带 g：返回包含所有匹配文本的数组。
+         正则不带 g：返回第一个匹配的详细信息数组【['o', index: 4, input: 'hello world!', groups: undefined]】。
+       需要同时拿到所有匹配的位置和分组信息时，可用 matchAll（正则必须带 g，返回迭代器）。
+       */
+      const result2 = str2.match(reg2);
+      console.log(result2); // (2) ['o', 'o']
+
+      // 替换
+      const reg3 = /o/gi;
+      const str3 = 'hello world!';
+      /*
+       签名：String.prototype.replace(pattern, replacement)。
+       pattern：正则对象，或普通字符串；传字符串时只按字面内容匹配，且只替换第一处。
+       replacement：替换成的字符串，或一个函数。
+       作用：把字符串中匹配 pattern 的部分替换成 replacement。
+       返回：替换后的新字符串；原字符串不会被修改。
+       */
+      const newStr3 = str3.replace(reg3, '@');
+      console.log(newStr3); // hell@ w@rld!
+
+      const str11 = 'java love me';
+      const str22 = 'I love java';
+      /*
+       ^ 写在 [] 外面表示「字符串开头」：/^java/ 要求字符串以 java 开头。
+       ^ 写在 [] 开头时含义不同，表示「取反」：[^0-9] 表示不是数字的单个字符。
+       $ 表示「字符串结尾」：/java$/ 要求以 java 结尾；/^java$/ 同时限定开头和结尾，整个字符串必须恰好就是 java。
+       多选一用 |：/^(java|html|css)/ 表示以其中任意一个开头；
+         | 的优先级最低，/^java|html$/ 的意思是「以 java 开头」或「以 html 结尾」；想表示整体二选一要加括号：/^(java|html)$/。
+       单个字符多选一用 []：/^[jJ]ava/ 表示以 j 或 J 开头。
+       位置匹配符：(?=x) 后面必须是 x，(?!x) 后面不能是 x，(?<=x) 前面必须是 x，(?<!x) 前面不能是 x
+       */
+      const reg11 = /^java/;
+      const reg22 = /java$/;
+      const reg33 = /^java$/;
+      console.log(reg11.test(str11)); // true
+      console.log(reg11.test(str22)); // false
+      console.log(reg22.test(str11)); // false
+      console.log(reg22.test(str22)); // true
+      console.log(reg33.test(str11)); // false
+      console.log(reg33.test(str22)); // false
+
+      // 校验用户名是否合法
+      /*
+       1.必须是字母开头
+       2.长度必须是6-10位
+       3.后面其他的字符可以是大小写字母、数字、下划线
+       */
+      const strA = 'asdfqwer';
+      /*
+       格式是 {n,m}，写成 {5,9}；含义是「前面紧挨着的那一项重复 5 到 9 次」。
+       常见变体：{n} 恰好 n 次；{n,} 至少 n 次（逗号后面的最大值可以省略）；{n,m} n 到 m 次。
+       花括号里不能有空格。
+       等价简写：[a-zA-Z0-9_] 等于 \w（\w 只含 ASCII 字母、数字、下划线），所以也可以写成 /^[a-zA-Z]\w{5,9}$/
+       */
+      const regA = /^[a-zA-Z][a-zA-Z0-9_]{5,9}$/;
+      console.log(regA.test(strA)); // true
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
