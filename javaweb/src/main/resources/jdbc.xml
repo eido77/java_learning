@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  写法：<?xml 必须小写；属性顺序固定为 version、encoding、standalone；属性值单双引号都行。
+       version 必须写，一般是 1.0；encoding 和 standalone 可以省略。
+-->
+<!--
+  1.根标签只能有一个
+  2.第一行永远都是 <?xml version="1.0" encoding="UTF-8"?> ，前面不可以放任何东西
+  3.xml是有约束，约束用于限定xml内部能编写的内容
+    dtd     简单，上手快，约束没有schema细致
+    schema  复杂，上手慢，约束比dtd约束细致
+
+  ① 标签成对闭合、正确嵌套      <a><b></b></a> 对，<a><b></a></b> 错
+  ② 区分大小写                  <Dev> 和 <dev> 是两个不同的标签
+  ③ 属性值必须加引号            id="001" 对，id=001 错；同一个标签里属性名不能重复
+  ④ 特殊字符要转义              <  写成 &lt;      >  写成 &gt;      &  写成 &amp;
+                                "  写成 &quot;    '  写成 &apos;
+  ⑤ 注释里不能出现两个连续的减号，也不能嵌套注释
+  ⑥ 空格和换行也算内容          <a> x </a> 的内容是 " x "，不是 "x"
+-->
+<jdbc>
+  <!--
+    【<jdbc> 根标签】
+      标签名自己起（叫 abc 也合法），叫 jdbc 只是让人一看就知道这份配置是给 JDBC 用的。
+
+    【<dev> <test> <formal> 三个环境】
+      同一个程序在不同地方运行，要连不同的数据库，所以准备三套配置：
+        dev     开发环境：程序员在自己电脑上开发时用
+        test    测试环境：测试人员测试时用
+        formal  正式环境：项目上线后真正给用户用的（行业里更常见的叫法是 prod）
+  -->
+  <dev id="001">
+    <username>root</username>
+    <password></password>
+    <!--
+      数据库驱动类的"全类名"（包名 + 类名）。
+      程序拿这个名字去加载驱动，驱动才知道怎么和 MySQL 对话。
+    -->
+    <driver>com.mysql.cj.jdbc.Driver</driver>
+    <!--
+      数据库连接地址，格式：协议:子协议://主机:端口/数据库名
+        jdbc:mysql:   固定写法，表示"用 JDBC 连 MySQL"
+        localhost     MySQL 所在的电脑，localhost 就是本机；连别的电脑就写它的 IP 或域名
+        3306          MySQL 的默认端口号
+        atguigu       要连接的数据库名，必须是 MySQL 里已经创建好的
+    -->
+    <url>jdbc:mysql://localhost:3306/atguigu</url>
+  </dev>
+  <test id="002">
+    <username>zhangsan</username>
+    <password>123456</password>
+    <driver>com.mysql.cj.jdbc.Driver</driver>
+    <url>jdbc:mysql://localhost:3306/atguigu</url>
+  </test>
+  <formal id="003">
+    <username>lisi</username>
+    <password>654321</password>
+    <driver>com.mysql.cj.jdbc.Driver</driver>
+    <url>jdbc:mysql://localhost:3306/atguigu</url>
+  </formal>
+</jdbc>
