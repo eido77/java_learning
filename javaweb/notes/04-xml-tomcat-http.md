@@ -56,3 +56,36 @@
 - 属性
     - 属性必须有值
     - 属性值必须加引号，单双都行
+
+> XML的约束(稍微了解)
+
+将来我们主要就是根据XML约束中的规定来编写XML配置文件，而且会在我们编写XML的时候根据约束来提示我们编写, 而XML约束主要包括DTD和Schema两种。
+
+- DTD
+- Schema
+
+Schema约束要求我们一个XML文档中，所有标签，所有属性都必须在约束中有明确的定义。
+
+下面我们以web.xml的约束声明为例来做个说明：
+
+```xml
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+```
+
+## 1.2 DOM4J进行XML解析
+
+### 1.2.1 DOM4J的使用步骤
+
+1. 导入jar包 dom4j.jar
+2. 创建解析器对象(SAXReader)
+3. 解析xml 获得Document对象
+4. 获取根节点RootElement
+5. 获取根节点下的子节点
+
+### 1.2.2 DOM4J的API介绍
+
+代码示例：[TestDom4j.java](../src/test/java/com/example/phase4/TestDom4j.java)
